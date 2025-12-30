@@ -1,3 +1,76 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "tv1",
+      "description": "News Today logo",
+      "imageUrl": "https://images.unsplash.com/photo-1663813064379-e35ad59c486d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxuZXdzJTIwbG9nb3xlbnwwfHx8fDE3NjcwODU2MDl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "news logo"
+    },
+    {
+      "id": "tv2",
+      "description": "Sports Arena logo",
+      "imageUrl": "https://images.unsplash.com/photo-1630347944760-4719d7196155?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxzcG9ydHMlMjBiYWxsfGVufDB8fHx8MTc2NzA4OTAzMHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "sports ball"
+    },
+    {
+      "id": "tv3",
+      "description": "Movie Mania logo",
+      "imageUrl": "https://images.unsplash.com/photo-1691480213129-106b2c7d1ee8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxtb3ZpZSUyMHBvcGNvcm58ZW58MHx8fHwxNzY3MDU3MDMwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "movie popcorn"
+    },
+    {
+      "id": "tv4",
+      "description": "Cartoon World logo",
+      "imageUrl": "https://images.unsplash.com/photo-1531259683007-016a7b628fc3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxjYXJ0b29uJTIwY2hhcmFjdGVyfGVufDB8fHx8MTc2NzA1ODAxNXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cartoon character"
+    },
+    {
+      "id": "tv5",
+      "description": "Discovery Earth logo",
+      "imageUrl": "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwbGFuZXQlMjBlYXJ0aHxlbnwwfHx8fDE3NjcwMzc4NDJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "planet earth"
+    },
+    {
+      "id": "tv6",
+      "description": "Music Hits logo",
+      "imageUrl": "https://images.unsplash.com/photo-1557090740-19c52e6270a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxtdXNpYyUyMG5vdGV8ZW58MHx8fHwxNzY3MDI1MTgyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "music note"
+    },
+    {
+      "id": "tv7",
+      "description": "Global News logo",
+      "imageUrl": "https://images.unsplash.com/photo-1760650006772-828f04784567?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxnbG9iZSUyMG5ld3N8ZW58MHx8fHwxNzY3MDg5MDMwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "globe news"
+    },
+    {
+      "id": "tv8",
+      "description": "Action Movies logo",
+      "imageUrl": "https://images.unsplash.com/photo-1705848533112-e9819b6af5f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxleHBsb3Npb24lMjBtb3ZpZXxlbnwwfHx8fDE3NjcwODkwMzB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "explosion movie"
+    },
+    {
+      "id": "tv9",
+      "description": "Pro Football logo",
+      "imageUrl": "https://images.unsplash.com/photo-1651421738652-12124d47c917?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxmb290YmFsbCUyMHN0YWRpdW18ZW58MHx8fHwxNzY2OTc4MDE4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "football stadium"
+    },
+    {
+      "id": "tv10",
+      "description": "Kids Fun logo",
+      "imageUrl": "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxraWRzJTIwcGxheWluZ3xlbnwwfHx8fDE3NjcwNDAxMzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "kids playing"
+    },
+    {
+      "id": "tv11",
+      "description": "Wild Life logo",
+      "imageUrl": "https://images.unsplash.com/photo-1663855008233-76462093c651?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxsaW9uJTIwd2lsZHxlbnwwfHx8fDE3NjcwODkwMzB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "lion wild"
+    },
+    {
+      "id": "tv12",
+      "description": "Classic Rock logo",
+      "imageUrl": "https://images.unsplash.com/photo-1672956940573-a6abf31df3ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxndWl0YXIlMjByb2NrfGVufDB8fHx8MTc2NzA4OTAzMHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "guitar rock"
+    }
+  ]
 }
