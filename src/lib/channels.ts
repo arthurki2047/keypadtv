@@ -10,7 +10,7 @@ export interface Channel {
 }
 
 const channelData = [
-  { id: '1', name: 'News Today', category: 'News', imageId: 'tv1' },
+  { id: '54161', name: 'News Today', category: 'News', imageId: 'tv1' },
   { id: '2', name: 'Sports Arena', category: 'Sports', imageId: 'tv2' },
   { id: '3', name: 'Movie Mania', category: 'Movies', imageId: 'tv3' },
   { id: '4', name: 'Cartoon World', category: 'Kids', imageId: 'tv4' },
@@ -26,10 +26,11 @@ const channelData = [
 
 export const channels: Channel[] = channelData.map(channel => {
   const imageData = PlaceHolderImages.find(img => img.id === channel.imageId);
+  const streamId = channel.id === '54161' ? '54161' : channel.id;
   return {
     ...channel,
     logo: imageData?.imageUrl || '',
     logoHint: imageData?.imageHint || '',
-    streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8', // Using a placeholder stream for all
+    streamUrl: `https://allinonereborn.xyz/amit/host.php?id=${streamId}`,
   }
 });
