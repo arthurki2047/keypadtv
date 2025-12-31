@@ -23,7 +23,7 @@ const channelData = [
   { id: '11', name: 'Wild Life', category: 'Documentary', imageId: 'tv11' },
   { id: '12', name: 'Classic Rock', category: 'Music', imageId: 'tv12' },
   { id: '1143', name: 'Sangeet Bangla', category: 'Music', imageId: 'tv13' },
-  { id: '14', name: 'Next DD i', category: 'News', imageId: 'tv14' },
+  { id: '14', name: 'DD India', category: 'News', imageId: 'tv14' },
 ];
 
 export const channels: Channel[] = channelData.map(channel => {
