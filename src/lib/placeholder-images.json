@@ -13,12 +13,6 @@
       "imageHint": "sports ball"
     },
     {
-      "id": "tv5",
-      "description": "Discovery Earth logo",
-      "imageUrl": "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwbGFuZXQlMjBlYXJ0aHxlbnwwfHx8fDE3NjcwMzc4NDJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "planet earth"
-    },
-    {
       "id": "tv6",
       "description": "Music Hits logo",
       "imageUrl": "https://images.unsplash.com/photo-1557090740-19c52e6270a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxtdXNpYyUyMG5vdGV8ZW58MHx8fHwxNzY3MDI1MTgyfDA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -83,6 +77,12 @@
       "description": "DD Bangla logo",
       "imageUrl": "https://images.unsplash.com/photo-1518023199896-195c8daf7539?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxiZW5nYWxpJTIwY3VsdHVyZXxlbnwwfHx8fDE3NjczODQyNjh8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "bengali culture"
+    },
+    {
+      "id": "tv18",
+      "description": "Enter 10 Bangla logo",
+      "imageUrl": "https://images.unsplash.com/photo-1588621471333-a3b04c35b8aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxiZW5nYWxpJTIwbW92aWV8ZW58MHx8fHwxNzY3Mzg4MTc5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "bengali movie"
     }
   ]
 }
