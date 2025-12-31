@@ -22,7 +22,7 @@ const channelData = [
   { id: '10', name: 'Kids Fun', category: 'Kids', imageId: 'tv10' },
   { id: '11', name: 'Wild Life', category: 'Documentary', imageId: 'tv11' },
   { id: '12', name: 'Classic Rock', category: 'Music', imageId: 'tv12' },
-  { id: '1143', name: 'Next Sb', category: 'News', imageId: 'tv13' },
+  { id: '1143', name: 'Sangeet Bangla', category: 'Music', imageId: 'tv13' },
   { id: '14', name: 'Next DD i', category: 'News', imageId: 'tv14' },
 ];
 
