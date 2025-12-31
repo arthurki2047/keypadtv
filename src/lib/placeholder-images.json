@@ -13,12 +13,6 @@
       "imageHint": "sports ball"
     },
     {
-      "id": "tv3",
-      "description": "Movie Mania logo",
-      "imageUrl": "https://images.unsplash.com/photo-1691480213129-106b2c7d1ee8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxtb3ZpZSUyMHBvcGNvcm58ZW58MHx8fHwxNzY3MDU3MDMwfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "movie popcorn"
-    },
-    {
       "id": "tv4",
       "description": "Cartoon World logo",
       "imageUrl": "https://images.unsplash.com/photo-1531259683007-016a7b628fc3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxjYXJ0b29uJTIwY2hhcmFjdGVyfGVufDB8fHx8MTc2NzA1ODAxNXww&ixlib=rb-4.1.0&q=80&w=1080",
@@ -83,6 +77,12 @@
       "description": "ABP Ananda logo",
       "imageUrl": "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxuZXdzJTIwYnJlYWtpbmclMjBuZXdzfGVufDB8fHx8MTc2NzI5MjQ1Nnww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "breaking news"
+    },
+    {
+      "id": "tv16",
+      "description": "Colors Bangla logo",
+      "imageUrl": "https://images.unsplash.com/photo-1593437351421-7e9b02a9b275?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjb2xvciUyMHZpYmVzfGVufDB8fHx8MTc2NzM3OTYxMXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "color vibes"
     }
   ]
 }

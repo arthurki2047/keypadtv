@@ -10,7 +10,7 @@ export interface Channel {
 }
 
 const channelData = [
-  { id: '3', name: 'Movie Mania', category: 'Movies', imageId: 'tv3' },
+  { id: '3', name: 'Colors Bangla', category: 'Entertainment', imageId: 'tv16' },
   { id: '4', name: 'Cartoon World', category: 'Kids', imageId: 'tv4' },
   { id: '5', name: 'Discovery Earth', category: 'Documentary', imageId: 'tv5' },
   { id: '6', name: 'Music Hits', category: 'Music', imageId: 'tv6' },
@@ -28,7 +28,9 @@ export const channels: Channel[] = channelData.map(channel => {
   const imageData = PlaceHolderImages.find(img => img.id === channel.imageId);
   let streamUrl = '';
 
-  if (channel.id === '1143') {
+  if (channel.id === '3') {
+    streamUrl = 'http://103.140.254.2:3500/live/756.m3u8';
+  } else if (channel.id === '1143') {
     streamUrl = 'https://cdn-4.pishow.tv/live/1143/master.m3u8';
   } else if (channel.id === '14') {
     streamUrl = 'https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/ceda14583477426aa162a65392d8ea07/index.m3u8';
