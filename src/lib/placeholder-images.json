@@ -71,6 +71,12 @@
       "description": "Classic Rock logo",
       "imageUrl": "https://images.unsplash.com/photo-1672956940573-a6abf31df3ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxndWl0YXIlMjByb2NrfGVufDB8fHx8MTc2NzA4OTAzMHww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "guitar rock"
+    },
+    {
+      "id": "tv13",
+      "description": "Next Sb logo",
+      "imageUrl": "https://images.unsplash.com/photo-1581092787765-e3feb951d987?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxuZXdzJTIwYnJvYWRjYXN0fGVufDB8fHx8MTc2NzE5MzA0Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "news broadcast"
     }
   ]
 }
