@@ -10,7 +10,7 @@ export interface Channel {
 }
 
 const channelData = [
-  { id: '3', name: 'Colors Bangla', category: 'Entertainment', imageId: 'tv16' },
+  { id: '3', name: 'DD National HD', category: 'Entertainment', imageId: 'tv20' },
   { id: '4', name: 'DD Bangla', category: 'Entertainment', imageId: 'tv17' },
   { id: '5', name: 'Enter 10 Bangla', category: 'Entertainment', imageId: 'tv18' },
   { id: '969', name: 'Aakaash Aath', category: 'Entertainment', imageId: 'tv19' },
@@ -29,7 +29,7 @@ export const channels: Channel[] = channelData.map(channel => {
   let streamUrl = '';
 
   if (channel.id === '3') {
-    streamUrl = 'http://103.140.254.2:3500/live/756.m3u8';
+    streamUrl = 'https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/40492a64c1db4a1385ba1a397d357d3a/index.m3u8';
   } else if (channel.id === '1143') {
     streamUrl = 'https://cdn-4.pishow.tv/live/1143/master.m3u8';
   } else if (channel.id === '14') {

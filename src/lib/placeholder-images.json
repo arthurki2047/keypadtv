@@ -61,12 +61,6 @@
       "imageHint": "breaking news"
     },
     {
-      "id": "tv16",
-      "description": "Colors Bangla logo",
-      "imageUrl": "https://images.unsplash.com/photo-1593437351421-7e9b02a9b275?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjb2xvciUyMHZpYmVzfGVufDB8fHx8MTc2NzM3OTYxMXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "color vibes"
-    },
-    {
       "id": "tv17",
       "description": "DD Bangla logo",
       "imageUrl": "https://images.unsplash.com/photo-1518023199896-195c8daf7539?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxiZW5nYWxpJTIwY3VsdHVyZXxlbnwwfHx8fDE3NjczODQyNjh8MA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -83,6 +77,12 @@
       "description": "Aakaash Aath logo",
       "imageUrl": "https://images.unsplash.com/photo-1549499834-325f4da41b18?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxza3klMjBuaWdodCUyMGNvbG9yc3xlbnwwfHx8fDE3NjczOTE2ODZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "sky night colors"
+    },
+    {
+      "id": "tv20",
+      "description": "DD National HD logo",
+      "imageUrl": "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxuZXdzJTIwYnJlYWtpbmclMjBuZXdzfGVufDB8fHx8MTc2NzI5MjQ1Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "breaking news"
     }
   ]
 }
