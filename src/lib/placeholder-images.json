@@ -13,12 +13,6 @@
       "imageHint": "sports ball"
     },
     {
-      "id": "tv4",
-      "description": "Cartoon World logo",
-      "imageUrl": "https://images.unsplash.com/photo-1531259683007-016a7b628fc3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxjYXJ0b29uJTIwY2hhcmFjdGVyfGVufDB8fHx8MTc2NzA1ODAxNXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "cartoon character"
-    },
-    {
       "id": "tv5",
       "description": "Discovery Earth logo",
       "imageUrl": "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwbGFuZXQlMjBlYXJ0aHxlbnwwfHx8fDE3NjcwMzc4NDJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -83,6 +77,12 @@
       "description": "Colors Bangla logo",
       "imageUrl": "https://images.unsplash.com/photo-1593437351421-7e9b02a9b275?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjb2xvciUyMHZpYmVzfGVufDB8fHx8MTc2NzM3OTYxMXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "color vibes"
+    },
+    {
+      "id": "tv17",
+      "description": "DD Bangla logo",
+      "imageUrl": "https://images.unsplash.com/photo-1518023199896-195c8daf7539?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxiZW5nYWxpJTIwY3VsdHVyZXxlbnwwfHx8fDE3NjczODQyNjh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "bengali culture"
     }
   ]
 }
