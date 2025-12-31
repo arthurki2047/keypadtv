@@ -13,12 +13,6 @@
       "imageHint": "sports ball"
     },
     {
-      "id": "tv6",
-      "description": "Music Hits logo",
-      "imageUrl": "https://images.unsplash.com/photo-1557090740-19c52e6270a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxtdXNpYyUyMG5vdGV8ZW58MHx8fHwxNzY3MDI1MTgyfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "music note"
-    },
-    {
       "id": "tv8",
       "description": "Action Movies logo",
       "imageUrl": "https://images.unsplash.com/photo-1705848533112-e9819b6af5f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxleHBsb3Npb24lMjBtb3ZpZXxlbnwwfHx8fDE3NjcwODkwMzB8MA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -83,6 +77,12 @@
       "description": "Enter 10 Bangla logo",
       "imageUrl": "https://images.unsplash.com/photo-1588621471333-a3b04c35b8aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxiZW5nYWxpJTIwbW92aWV8ZW58MHx8fHwxNzY3Mzg4MTc5fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "bengali movie"
+    },
+    {
+      "id": "tv19",
+      "description": "Aakaash Aath logo",
+      "imageUrl": "https://images.unsplash.com/photo-1549499834-325f4da41b18?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxza3klMjBuaWdodCUyMGNvbG9yc3xlbnwwfHx8fDE3NjczOTE2ODZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "sky night colors"
     }
   ]
 }

@@ -13,7 +13,7 @@ const channelData = [
   { id: '3', name: 'Colors Bangla', category: 'Entertainment', imageId: 'tv16' },
   { id: '4', name: 'DD Bangla', category: 'Entertainment', imageId: 'tv17' },
   { id: '5', name: 'Enter 10 Bangla', category: 'Entertainment', imageId: 'tv18' },
-  { id: '6', name: 'Music Hits', category: 'Music', imageId: 'tv6' },
+  { id: '969', name: 'Aakaash Aath', category: 'Entertainment', imageId: 'tv19' },
   { id: '7', name: 'ABP Ananda', category: 'News', imageId: 'tv15' },
   { id: '8', name: 'Action Movies', category: 'Movies', imageId: 'tv8' },
   { id: '9', name: 'Pro Football', category: 'Sports', imageId: 'tv9' },
@@ -40,6 +40,8 @@ export const channels: Channel[] = channelData.map(channel => {
     streamUrl = 'https://d3eyhgoylams0m.cloudfront.net/v1/manifest/93ce20f0f52760bf38be911ff4c91ed02aa2fd92/ed7bd2c7-8d10-4051-b397-2f6b90f99acb/2e9e32a4-c4f7-49c3-96d6-c4e3660c7e3f/2.m3u8';
   } else if (channel.id === '5') {
     streamUrl = 'https://live-bangla.akamaized.net/liveabr/playlist.m3u8';
+  } else if (channel.id === '969') {
+    streamUrl = 'https://cdn-4.pishow.tv/live/969/master.m3u8';
   } else {
     const streamId = channel.id === '54161' ? '54161' : channel.id;
     streamUrl = `https://allinonereborn.xyz/amit/host.php?id=${streamId}`;
