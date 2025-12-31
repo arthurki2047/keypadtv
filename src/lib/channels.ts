@@ -23,6 +23,7 @@ const channelData = [
   { id: '11', name: 'Wild Life', category: 'Documentary', imageId: 'tv11' },
   { id: '12', name: 'Classic Rock', category: 'Music', imageId: 'tv12' },
   { id: '1143', name: 'Next Sb', category: 'News', imageId: 'tv13' },
+  { id: '14', name: 'Next DD i', category: 'News', imageId: 'tv14' },
 ];
 
 export const channels: Channel[] = channelData.map(channel => {
@@ -31,6 +32,8 @@ export const channels: Channel[] = channelData.map(channel => {
 
   if (channel.id === '1143') {
     streamUrl = 'https://cdn-4.pishow.tv/live/1143/master.m3u8';
+  } else if (channel.id === '14') {
+    streamUrl = 'https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/ceda14583477426aa162a65392d8ea07/index.m3u8';
   } else {
     const streamId = channel.id === '54161' ? '54161' : channel.id;
     streamUrl = `https://allinonereborn.xyz/amit/host.php?id=${streamId}`;

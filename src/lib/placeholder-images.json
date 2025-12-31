@@ -75,7 +75,13 @@
     {
       "id": "tv13",
       "description": "Next Sb logo",
-      "imageUrl": "https://images.unsplash.com/photo-1581092787765-e3feb951d987?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxuZXdzJTIwYnJvYWRjYXN0fGVufDB8fHx8MTc2NzE5MzA0Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1581092787765-e9819b6af5f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxuZXdzJTIwYnJvYWRjYXN0fGVufDB8fHx8MTc2NzE5MzA0Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "news broadcast"
+    },
+    {
+      "id": "tv14",
+      "description": "Next DD i logo",
+      "imageUrl": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxuZXdzJTIwYnJvYWRjYXN0fGVufDB8fHx8MTc2NzE5MzA0Mnww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "news broadcast"
     }
   ]
