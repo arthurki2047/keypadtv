@@ -10,8 +10,6 @@ export interface Channel {
 }
 
 const channelData = [
-  { id: '54161', name: 'News Today', category: 'News', imageId: 'tv1' },
-  { id: '2', name: 'Sports Arena', category: 'Sports', imageId: 'tv2' },
   { id: '3', name: 'Movie Mania', category: 'Movies', imageId: 'tv3' },
   { id: '4', name: 'Cartoon World', category: 'Kids', imageId: 'tv4' },
   { id: '5', name: 'Discovery Earth', category: 'Documentary', imageId: 'tv5' },
