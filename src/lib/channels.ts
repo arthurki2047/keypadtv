@@ -12,7 +12,6 @@ export interface Channel {
 
 const channelData = [
   { id: '3', name: 'DD National HD', category: 'Entertainment', imageId: 'tv20' },
-  { id: '4', name: 'DD Bangla', category: 'Entertainment', imageId: 'tv17' },
   { id: '5', name: 'Enter 10 Bangla', category: 'Entertainment', imageId: 'tv18' },
   { id: '969', name: 'Aakaash Aath', category: 'Entertainment', imageId: 'tv19' },
   { id: '7', name: 'ABP Ananda', category: 'News', imageId: 'tv15' },
