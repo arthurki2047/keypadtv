@@ -25,7 +25,13 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
       const streamUrl = channel.streamUrl;
 
       if (Hls.isSupported()) {
-        hls = new Hls();
+        hls = new Hls({
+            // More robust error handling
+            maxBufferLength: 30,
+            maxMaxBufferLength: 600,
+            startLevel: -1, 
+            autoStartLoad: true,
+        });
         hls.loadSource(streamUrl);
         hls.attachMedia(video);
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
