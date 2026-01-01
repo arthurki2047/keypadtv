@@ -23,6 +23,7 @@ const channelData = [
   { id: '14', name: 'DD India', category: 'News', imageId: 'tv14' },
   { id: '9001', name: '9X Jalwa', category: 'Music', imageId: 'tv24' },
   { id: '9002', name: '9XM', category: 'Music', imageId: 'tv25' },
+  { id: '1459', name: 'Goldmines', category: 'Movies', imageId: 'tv26' },
 ];
 
 export const channels: Channel[] = channelData.map(channel => {
@@ -57,6 +58,8 @@ export const channels: Channel[] = channelData.map(channel => {
     streamUrlString = 'https://9xjio.wiseplayout.com/9XJALWA/master.m3u8';
   } else if (channel.id === '9002') {
     streamUrlString = 'https://9xjio.wiseplayout.com/9XM/master.m3u8';
+  } else if (channel.id === '1459') {
+    streamUrlString = 'https://cdn-2.pishow.tv/live/1459/master.m3u8';
   } else {
     // Default or other channels
     const streamId = channel.id === '54161' ? '54161' : channel.id;
