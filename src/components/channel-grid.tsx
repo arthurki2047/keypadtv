@@ -13,6 +13,8 @@ type ChannelGridProps = {
 
 export function ChannelGrid({ allChannels }: ChannelGridProps) {
   const [searchTerm, setSearchTerm] = useState('');
+  const [submittedSearchTerm, setSubmittedSearchTerm] = useState('');
+
   const [focusIndex, setFocusIndex] = useState(0);
   const router = useRouter();
   const gridRef = useRef<HTMLDivElement>(null);
@@ -34,12 +36,13 @@ export function ChannelGrid({ allChannels }: ChannelGridProps) {
   }, []);
 
   const filteredChannels = useMemo(() => {
-    return filterChannels(allChannels, searchTerm);
-  }, [allChannels, searchTerm]);
+    const termToFilter = submittedSearchTerm || searchTerm;
+    return filterChannels(allChannels, termToFilter);
+  }, [allChannels, searchTerm, submittedSearchTerm]);
   
   useEffect(() => {
     setFocusIndex(0);
-  }, [searchTerm]);
+  }, [searchTerm, submittedSearchTerm]);
 
   const onEnter = (index: number) => {
     if (index >= 0 && index < filteredChannels.length) {
@@ -57,9 +60,28 @@ export function ChannelGrid({ allChannels }: ChannelGridProps) {
     setFocusIndex,
   });
 
+  const handleSearchSubmit = () => {
+    setSubmittedSearchTerm(searchTerm);
+    // Move focus to the first item in the grid
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+      searchInput.blur();
+    }
+    setFocusIndex(0);
+  };
+  
   return (
     <div className="min-h-screen flex flex-col">
-      <Header searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+      <Header 
+        searchTerm={searchTerm} 
+        onSearchChange={(v) => {
+          setSearchTerm(v);
+          if (submittedSearchTerm) {
+            setSubmittedSearchTerm('');
+          }
+        }}
+        onSearchSubmit={handleSearchSubmit}
+      />
       <main className="flex-grow container mx-auto p-4 md:p-8">
         {filteredChannels.length > 0 ? (
           <div

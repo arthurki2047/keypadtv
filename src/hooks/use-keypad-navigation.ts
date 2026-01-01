@@ -12,6 +12,10 @@ type UseKeypadNavigationProps = {
   loop?: boolean;
 };
 
+// Focus constants
+const SEARCH_INPUT_INDEX = -1;
+const SEARCH_BUTTON_INDEX = -2;
+
 export function useKeypadNavigation({
   gridRef,
   itemCount,
@@ -25,49 +29,74 @@ export function useKeypadNavigation({
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if (!gridRef.current || itemCount === 0) return;
-            
-            if (e.target instanceof HTMLInputElement) {
-                if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter'].includes(e.key)) {
-                    (e.target as HTMLElement).blur();
-                } else {
-                    return;
-                }
-            }
-            
             lastInteraction.current = 'key';
             let newIndex = focusIndex;
+
+            const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+            const searchButton = document.getElementById('search-button') as HTMLButtonElement | null;
+            const isSearchActive = document.activeElement === searchInput || document.activeElement === searchButton;
+
+            if (document.activeElement === searchInput && !['ArrowDown', 'Enter'].includes(e.key)) {
+                return; // Allow typing in search
+            }
+             if (e.target instanceof HTMLInputElement && e.key !== 'Enter') {
+                if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                    (e.target as HTMLElement).blur();
+                } else {
+                     return;
+                }
+            }
+
 
             switch (e.key) {
                 case 'ArrowUp':
                     e.preventDefault();
-                    newIndex = focusIndex - columns;
+                    if (focusIndex < columns) { // Top row of grid
+                        newIndex = SEARCH_INPUT_INDEX;
+                    } else if (focusIndex === SEARCH_BUTTON_INDEX) {
+                        newIndex = SEARCH_INPUT_INDEX;
+                    } else {
+                        newIndex = focusIndex - columns;
+                    }
                     break;
                 case 'ArrowDown':
                     e.preventDefault();
-                    newIndex = focusIndex + columns;
+                    if (focusIndex === SEARCH_INPUT_INDEX) {
+                        if (searchButton) newIndex = SEARCH_BUTTON_INDEX;
+                        else newIndex = 0;
+                    } else if (focusIndex === SEARCH_BUTTON_INDEX) {
+                        newIndex = 0; // Go to first grid item
+                    } else {
+                        newIndex = focusIndex + columns;
+                    }
                     break;
                 case 'ArrowLeft':
                     e.preventDefault();
-                    if (focusIndex % columns !== 0) {
+                    if (focusIndex >= 0 && focusIndex % columns !== 0) {
                         newIndex = focusIndex - 1;
                     }
                     break;
                 case 'ArrowRight':
                     e.preventDefault();
-                    if ((focusIndex + 1) % columns !== 0 && focusIndex + 1 < itemCount) {
+                    if (focusIndex >= 0 && (focusIndex + 1) % columns !== 0 && focusIndex + 1 < itemCount) {
                         newIndex = focusIndex + 1;
                     }
                     break;
                 case 'Enter':
                     e.preventDefault();
-                    onEnter(focusIndex);
+                    if (focusIndex >= 0) {
+                      onEnter(focusIndex);
+                    } else if (focusIndex === SEARCH_INPUT_INDEX && searchButton) {
+                        searchButton.click();
+                    } else if (focusIndex === SEARCH_BUTTON_INDEX && searchButton) {
+                        searchButton.click();
+                    }
                     return;
                 default:
                     return;
             }
 
-            if (newIndex >= 0 && newIndex < itemCount) {
+            if (newIndex >= -2 && newIndex < itemCount) {
                 setFocusIndex(newIndex);
             }
         };
@@ -80,7 +109,22 @@ export function useKeypadNavigation({
     }, [focusIndex, setFocusIndex, itemCount, columns, onEnter, gridRef, loop]);
 
     useEffect(() => {
-        if (lastInteraction.current === 'mouse' || focusIndex < 0) return;
+        if (lastInteraction.current === 'mouse') return;
+
+        const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+        const searchButton = document.getElementById('search-button') as HTMLButtonElement | null;
+
+        if (focusIndex === SEARCH_INPUT_INDEX) {
+            searchInput?.focus();
+            return;
+        }
+        if (focusIndex === SEARCH_BUTTON_INDEX) {
+            searchButton?.focus();
+            return;
+        }
+        
+        if (focusIndex < 0) return;
+
         const grid = gridRef.current;
         if (!grid) return;
         
@@ -91,7 +135,7 @@ export function useKeypadNavigation({
                 focusableElement.focus();
             }
         }
-    }, [focusIndex, gridRef, itemCount]); // Rerun on itemCount change to focus first item of new list
+    }, [focusIndex, gridRef, itemCount]);
 
     const handleMouseOver = (index: number) => {
       lastInteraction.current = 'mouse';
