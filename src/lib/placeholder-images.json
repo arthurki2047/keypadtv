@@ -13,18 +13,6 @@
       "imageHint": "sports ball"
     },
     {
-      "id": "tv10",
-      "description": "Kids Fun logo",
-      "imageUrl": "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxraWRzJTIwcGxheWluZ3xlbnwwfHx8fDE3NjcwNDAxMzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "kids playing"
-    },
-    {
-      "id": "tv11",
-      "description": "Wild Life logo",
-      "imageUrl": "https://images.unsplash.com/photo-1663855008233-76462093c651?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxsaW9uJTIwd2lsZHxlbnwwfHx8fDE3NjcwODkwMzB8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "lion wild"
-    },
-    {
       "id": "tv12",
       "description": "Classic Rock logo",
       "imageUrl": "https://images.unsplash.com/photo-1672956940573-a6abf31df3ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxndWl0YXIlMjByb2NrfGVufDB8fHx8MTc2NzA4OTAzMHww&ixlib=rb-4.1.0&q=80&w=1080",

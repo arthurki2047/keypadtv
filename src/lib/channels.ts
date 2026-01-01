@@ -17,7 +17,7 @@ const channelData = [
   { id: '7', name: 'ABP Ananda', category: 'News', imageId: 'tv15' },
   { id: '21', name: 'TV9 Bangla', category: 'News', imageId: 'tv21' },
   { id: '10', name: 'Republic Bangla', category: 'News', imageId: 'tv22' },
-  { id: '11', name: 'Wild Life', category: 'Documentary', imageId: 'tv11' },
+  { id: '13', name: 'DD Sports', category: 'Sports', imageId: 'tv2' },
   { id: '12', name: 'Classic Rock', category: 'Music', imageId: 'tv12' },
   { id: '1143', name: 'Sangeet Bangla', category: 'Music', imageId: 'tv13' },
   { id: '14', name: 'DD India', category: 'News', imageId: 'tv14' },
@@ -47,6 +47,8 @@ export const channels: Channel[] = channelData.map(channel => {
     streamUrlString = 'https://dyjmyiv3bp2ez.cloudfront.net/pub-iotv9banaen8yq/liveabr/playlist.m3u8';
   } else if (channel.id === '10') {
     streamUrlString = 'https://vg-republictvlive.akamaized.net/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/vglive-sk-456368/main.m3u8';
+  } else if (channel.id === '13') {
+    streamUrlString = 'https://cdn-6.pishow.tv/live/13/master.m3u8';
   } else {
     // Default or other channels
     const streamId = channel.id === '54161' ? '54161' : channel.id;
