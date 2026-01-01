@@ -83,6 +83,11 @@ export function ChannelGrid({ allChannels }: ChannelGridProps) {
           </div>
         )}
       </main>
+      <div className="fixed bottom-4 left-4 z-50">
+        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-black text-white text-xs font-bold">
+          N
+        </div>
+      </div>
     </div>
   );
 }
