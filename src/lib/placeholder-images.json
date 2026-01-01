@@ -71,6 +71,12 @@
       "description": "Republic Bangla logo",
       "imageUrl": "https://images.unsplash.com/photo-1572949645841-094f3a9c4c94?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxuZXdzJTIwbWljcm9waG9uZXxlbnwwfHx8fDE3NjkxOTI3NDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "news microphone"
+    },
+    {
+      "id": "tv23",
+      "description": "Star Gold logo",
+      "imageUrl": "https://images.unsplash.com/photo-1574267432553-f3202520410c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtb3ZpZSUyMGxvZ298ZW58MHx8fHwxNzY5MjAyMjMxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "movie logo"
     }
   ]
 }
