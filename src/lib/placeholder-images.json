@@ -37,6 +37,12 @@
       "imageHint": "breaking news"
     },
     {
+      "id": "tv17",
+      "description": "DD Bangla logo",
+      "imageUrl": "https://images.unsplash.com/photo-1598454448492-987639554162?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxIb3dyYWglMjBCcmlkZ2V8ZW58MHx8fHwxNzcxMDY5NTk1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "Howrah Bridge"
+    },
+    {
       "id": "tv18",
       "description": "Enter 10 Bangla logo",
       "imageUrl": "https://images.unsplash.com/photo-1588621471333-a3b04c35b8aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxiZW5nYWxpJTIwbW92aWV8ZW58MHx8fHwxNzY3Mzg4MTc5fDA&ixlib=rb-4.1.0&q=80&w=1080",

@@ -11,6 +11,7 @@ export interface Channel {
 }
 
 const channelData = [
+  { id: '4', name: 'DD Bangla', category: 'Entertainment', imageId: 'tv17' },
   { id: '3', name: 'DD National HD', category: 'Entertainment', imageId: 'tv20' },
   { id: '5', name: 'Enter 10 Bangla', category: 'Entertainment', imageId: 'tv18' },
   { id: '969', name: 'Aakaash Aath', category: 'Entertainment', imageId: 'tv19' },
@@ -97,5 +98,3 @@ export function filterChannels(channels: Channel[], searchTerm: string): Channel
   const regex = new RegExp(escapedTerm, 'i');
   return channels.filter(channel => regex.test(channel.name));
 }
-
-    
