@@ -62,7 +62,7 @@ export const channels: Channel[] = channelData.map(channel => {
   } else if (channel.id === '1459') {
     streamUrlString = 'https://cdn-2.pishow.tv/live/1459/master.m3u8';
   } else if (channel.id === '5001') {
-    streamUrlString = 'https://newsnation-bangla-silo.jio.com/manifest/master.m3u8';
+    streamUrlString = 'https://n18syndication.akamaized.net/bpk-tv/News18_Bangla_NW18_MOB/output01/master.m3u8';
   }
    else {
     // Default or other channels
