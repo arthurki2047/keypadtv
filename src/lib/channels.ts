@@ -17,6 +17,7 @@ const channelData = [
   { id: '7', name: 'ABP Ananda', category: 'News', imageId: 'tv15' },
   { id: '21', name: 'TV9 Bangla', category: 'News', imageId: 'tv21' },
   { id: '10', name: 'Republic Bangla', category: 'News', imageId: 'tv22' },
+  { id: '5001', name: 'News 18 Bangla', category: 'News', imageId: 'tv27' },
   { id: '13', name: 'DD Sports', category: 'Sports', imageId: 'tv2' },
   { id: '12', name: 'B4U Music', category: 'Music', imageId: 'tv13' },
   { id: '1143', name: 'Sangeet Bangla', category: 'Music', imageId: 'tv13' },
@@ -60,7 +61,10 @@ export const channels: Channel[] = channelData.map(channel => {
     streamUrlString = 'https://9xjio.wiseplayout.com/9XM/master.m3u8';
   } else if (channel.id === '1459') {
     streamUrlString = 'https://cdn-2.pishow.tv/live/1459/master.m3u8';
-  } else {
+  } else if (channel.id === '5001') {
+    streamUrlString = 'https://newsnation-bangla-silo.jio.com/manifest/master.m3u8';
+  }
+   else {
     // Default or other channels
     const streamId = channel.id === '54161' ? '54161' : channel.id;
     streamUrlString = `https://allinonereborn.xyz/amit/host.php?id=${streamId}`;
