@@ -18,7 +18,7 @@ const channelData = [
   { id: '21', name: 'TV9 Bangla', category: 'News', imageId: 'tv21' },
   { id: '10', name: 'Republic Bangla', category: 'News', imageId: 'tv22' },
   { id: '13', name: 'DD Sports', category: 'Sports', imageId: 'tv2' },
-  { id: '12', name: 'Star Gold', category: 'Movies', imageId: 'tv23' },
+  { id: '12', name: 'B4U Music', category: 'Music', imageId: 'tv13' },
   { id: '1143', name: 'Sangeet Bangla', category: 'Music', imageId: 'tv13' },
   { id: '14', name: 'DD India', category: 'News', imageId: 'tv14' },
 ];
@@ -50,7 +50,7 @@ export const channels: Channel[] = channelData.map(channel => {
   } else if (channel.id === '13') {
     streamUrlString = 'https://cdn-6.pishow.tv/live/13/master.m3u8';
   } else if (channel.id === '12') {
-    streamUrlString = 'http://66.102.120.18:8000/play/a00f/index.m3u8';
+    streamUrlString = 'https://cdnb4u.wiseplayout.com/B4U_Music/master.m3u8';
   } else {
     // Default or other channels
     const streamId = channel.id === '54161' ? '54161' : channel.id;
