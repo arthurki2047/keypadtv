@@ -99,7 +99,7 @@
     {
       "id": "tv27",
       "description": "News 18 Bangla logo",
-      "imageUrl": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxuZXdzJTIwc3R1ZGlvfGVufDB8fHx8MTc2OTUzODM0NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxuZXdzJTIwc3R1ZGlvfGVufDB8fHx8MTc3OTUzODM0NHww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "news studio"
     },
     {
@@ -113,6 +113,12 @@
       "description": "Rongeen TV logo",
       "imageUrl": "https://images.unsplash.com/photo-1595423805908-5689038e1b6f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtdWx0aWNvbG9yJTIwcGF0dGVybnxlbnwwfHx8fDE3NzAzODU0NDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "multicolor pattern"
+    },
+    {
+      "id": "tv_default",
+      "description": "Default TV logo",
+      "imageUrl": "https://images.unsplash.com/photo-1593784999539-5304AC782a20?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxURVNUJTIwUEFUVEVSTnxlbnwwfHx8fDE3NzE1NDQzNjd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "test pattern"
     }
   ]
 }

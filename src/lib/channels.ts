@@ -32,6 +32,7 @@ const channelData = [
 
 export const channels: Channel[] = channelData.map(channel => {
   const imageData = PlaceHolderImages.find(img => img.id === channel.imageId);
+  const defaultImageData = PlaceHolderImages.find(img => img.id === 'tv_default');
   
   // Base URLs and specific stream logic
   let streamUrlString = '';
@@ -78,8 +79,8 @@ export const channels: Channel[] = channelData.map(channel => {
 
   return {
     ...channel,
-    logo: imageData?.imageUrl || '',
-    logoHint: imageData?.imageHint || '',
+    logo: imageData?.imageUrl || defaultImageData?.imageUrl || '',
+    logoHint: imageData?.imageHint || defaultImageData?.imageHint || '',
     streamUrl: streamUrlString,
   };
 });
@@ -97,3 +98,5 @@ export function filterChannels(channels: Channel[], searchTerm: string): Channel
   const regex = new RegExp(escapedTerm, 'i');
   return channels.filter(channel => regex.test(channel.name));
 }
+
+    
