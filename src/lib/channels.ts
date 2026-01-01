@@ -19,12 +19,13 @@ const channelData = [
   { id: '10', name: 'Republic Bangla', category: 'News', imageId: 'tv22' },
   { id: '5001', name: 'News 18 Bangla', category: 'News', imageId: 'tv27' },
   { id: '13', name: 'DD Sports', category: 'Sports', imageId: 'tv2' },
-  { id: '12', name: 'B4U Music', category: 'Music', imageId: 'tv13' },
+  { id: '12', name: 'B4U Music', category: 'Music', imageId: 'tv12' },
   { id: '1143', name: 'Sangeet Bangla', category: 'Music', imageId: 'tv13' },
   { id: '14', name: 'DD India', category: 'News', imageId: 'tv14' },
   { id: '9001', name: '9X Jalwa', category: 'Music', imageId: 'tv24' },
   { id: '9002', name: '9XM', category: 'Music', imageId: 'tv25' },
   { id: '1459', name: 'Goldmines', category: 'Movies', imageId: 'tv26' },
+  { id: '559', name: 'Pogo', category: 'Kids', imageId: 'tv28' },
 ];
 
 export const channels: Channel[] = channelData.map(channel => {
@@ -67,7 +68,7 @@ export const channels: Channel[] = channelData.map(channel => {
    else {
     // Default or other channels
     const streamId = channel.id === '54161' ? '54161' : channel.id;
-    streamUrlString = `https://allinonereborn.xyz/amit/host.php?id=${streamId}`;
+    streamUrlString = `https://mini.allinonereborn.fun/jiotv-inn/app/ts_live_${streamId}.m3u8`;
   }
 
   return {
