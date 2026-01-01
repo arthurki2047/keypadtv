@@ -25,11 +25,19 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
       const streamUrl = channel.streamUrl;
 
       if (Hls.isSupported()) {
-        hls = new Hls();
+        hls = new Hls({
+            // Add configuration for more robust playback
+            enableWorker: true,
+            lowLatencyMode: true,
+            backBufferLength: 90,
+        });
         hls.loadSource(streamUrl);
         hls.attachMedia(video);
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
           video.play().catch(error => console.error("Autoplay was prevented:", error));
+        });
+        hls.on(Hls.Events.ERROR, function (event, data) {
+            console.error('HLS.js error:', data);
         });
       } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.src = streamUrl;
@@ -78,7 +86,7 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
       </header>
 
       <main className="flex-1 flex items-center justify-center bg-black p-1 min-h-0">
-          <video ref={videoRef} controls crossOrigin="anonymous" className="w-full h-full max-w-full max-h-full" />
+          <video ref={videoRef} controls autoPlay playsInline crossOrigin="anonymous" className="w-full h-full max-w-full max-h-full" />
       </main>
     </div>
   );
