@@ -25,19 +25,32 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
       const streamUrl = channel.streamUrl;
 
       if (Hls.isSupported()) {
-        hls = new Hls({
-            // Add configuration for more robust playback
-            enableWorker: true,
-            lowLatencyMode: true,
-            backBufferLength: 90,
-        });
+        hls = new Hls();
         hls.loadSource(streamUrl);
         hls.attachMedia(video);
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
           video.play().catch(error => console.error("Autoplay was prevented:", error));
         });
         hls.on(Hls.Events.ERROR, function (event, data) {
-            console.error('HLS.js error:', data);
+            if (data.fatal) {
+              switch(data.type) {
+                case Hls.ErrorTypes.NETWORK_ERROR:
+                  console.error('Fatal network error encountered, trying to recover', data);
+                  hls.startLoad();
+                  break;
+                case Hls.ErrorTypes.MEDIA_ERROR:
+                  console.error('Fatal media error encountered, trying to recover', data);
+                  hls.recoverMediaError();
+                  break;
+                default:
+                  // cannot recover
+                  console.error('Fatal HLS.js error, cannot recover', data);
+                  hls.destroy();
+                  break;
+              }
+            } else {
+                console.warn('Non-fatal HLS.js error:', data);
+            }
         });
       } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.src = streamUrl;
