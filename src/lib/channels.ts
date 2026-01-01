@@ -5,7 +5,7 @@ export interface Channel {
   name: string;
   logo: string;
   logoHint: string;
-  streamUrl: URL;
+  streamUrl: string;
   category: string;
 }
 
@@ -51,7 +51,7 @@ export const channels: Channel[] = channelData.map(channel => {
     ...channel,
     logo: imageData?.imageUrl || '',
     logoHint: imageData?.imageHint || '',
-    streamUrl: new URL(streamUrlString),
+    streamUrl: streamUrlString,
   }
 });
 

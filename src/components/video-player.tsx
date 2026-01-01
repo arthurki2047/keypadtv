@@ -22,7 +22,7 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
 
     async function initializePlayer() {
       const Hls = (await import('hls.js')).default;
-      const streamUrl = channel.streamUrl.toString();
+      const streamUrl = channel.streamUrl;
 
       if (Hls.isSupported()) {
         hls = new Hls();
