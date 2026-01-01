@@ -5,7 +5,7 @@ export interface Channel {
   name: string;
   logo: string;
   logoHint: string;
-  streamUrl: string;
+  streamUrl: URL;
   category: string;
 }
 
@@ -26,31 +26,45 @@ const channelData = [
 
 export const channels: Channel[] = channelData.map(channel => {
   const imageData = PlaceHolderImages.find(img => img.id === channel.imageId);
-  let streamUrl = '';
+  let streamUrlString = '';
 
   if (channel.id === '3') {
-    streamUrl = 'https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/40492a64c1db4a1385ba1a397d357d3a/index.m3u8';
+    streamUrlString = 'https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/40492a64c1db4a1385ba1a397d357d3a/index.m3u8';
   } else if (channel.id === '1143') {
-    streamUrl = 'https://cdn-4.pishow.tv/live/1143/master.m3u8';
+    streamUrlString = 'https://cdn-4.pishow.tv/live/1143/master.m3u8';
   } else if (channel.id === '14') {
-    streamUrl = 'https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/ceda14583477426aa162a65392d8ea07/index.m3u8';
+    streamUrlString = 'https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/ceda14583477426aa162a65392d8ea07/index.m3u8';
   } else if (channel.id === '7') {
-    streamUrl = 'https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/abp-ananda/master.m3u8';
+    streamUrlString = 'https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/abp-ananda/master.m3u8';
   } else if (channel.id === '4') {
-    streamUrl = 'https://d3eyhgoylams0m.cloudfront.net/v1/manifest/93ce20f0f52760bf38be911ff4c91ed02aa2fd92/ed7bd2c7-8d10-4051-b397-2f6b90f99acb/2e9e32a4-c4f7-49c3-96d6-c4e3660c7e3f/2.m3u8';
+    streamUrlString = 'https://d3eyhgoylams0m.cloudfront.net/v1/manifest/93ce20f0f52760bf38be911ff4c91ed02aa2fd92/ed7bd2c7-8d10-4051-b397-2f6b90f99acb/2e9e32a4-c4f7-49c3-96d6-c4e3660c7e3f/2.m3u8';
   } else if (channel.id === '5') {
-    streamUrl = 'https://live-bangla.akamaized.net/liveabr/playlist.m3u8';
+    streamUrlString = 'https://live-bangla.akamaized.net/liveabr/playlist.m3u8';
   } else if (channel.id === '969') {
-    streamUrl = 'https://cdn-4.pishow.tv/live/969/master.m3u8';
+    streamUrlString = 'https://cdn-4.pishow.tv/live/969/master.m3u8';
   } else {
     const streamId = channel.id === '54161' ? '54161' : channel.id;
-    streamUrl = `https://allinonereborn.xyz/amit/host.php?id=${streamId}`;
+    streamUrlString = `https://allinonereborn.xyz/amit/host.php?id=${streamId}`;
   }
 
   return {
     ...channel,
     logo: imageData?.imageUrl || '',
     logoHint: imageData?.imageHint || '',
-    streamUrl: streamUrl,
+    streamUrl: new URL(streamUrlString),
   }
 });
+
+// Function to safely escape characters for regex
+function escapeRegExp(string: string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
+
+export function filterChannels(channels: Channel[], searchTerm: string): Channel[] {
+  if (!searchTerm) {
+    return channels;
+  }
+  const escapedTerm = escapeRegExp(searchTerm.toLowerCase());
+  const regex = new RegExp(escapedTerm, 'i');
+  return channels.filter(channel => regex.test(channel.name));
+}

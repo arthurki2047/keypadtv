@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import type { Channel } from '@/lib/channels';
+import { type Channel, filterChannels } from '@/lib/channels';
 import { useKeypadNavigation } from '@/hooks/use-keypad-navigation';
 import { ChannelCard } from './channel-card';
 import { Header } from './header';
@@ -34,9 +34,7 @@ export function ChannelGrid({ allChannels }: ChannelGridProps) {
   }, []);
 
   const filteredChannels = useMemo(() => {
-    return allChannels.filter(channel =>
-      channel.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    return filterChannels(allChannels, searchTerm);
   }, [allChannels, searchTerm]);
   
   useEffect(() => {
