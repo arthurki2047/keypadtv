@@ -77,6 +77,12 @@
       "description": "TV9 Bangla logo",
       "imageUrl": "https://images.unsplash.com/photo-1503551385969-e41a99f12d83?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxuZXdzJTIwcmVwb3J0ZXJ8ZW58MHx8fHwxNzY5MDM5MjYwfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "news reporter"
+    },
+    {
+      "id": "tv22",
+      "description": "Republic Bangla logo",
+      "imageUrl": "https://images.unsplash.com/photo-1572949645841-094f3a9c4c94?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxuZXdzJTIwbWljcm9waG9uZXxlbnwwfHx8fDE3NjkxOTI3NDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "news microphone"
     }
   ]
 }
