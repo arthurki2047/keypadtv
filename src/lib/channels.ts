@@ -15,7 +15,7 @@ const channelData = [
   { id: '5', name: 'Enter 10 Bangla', category: 'Entertainment', imageId: 'tv18' },
   { id: '969', name: 'Aakaash Aath', category: 'Entertainment', imageId: 'tv19' },
   { id: '7', name: 'ABP Ananda', category: 'News', imageId: 'tv15' },
-  { id: '9', name: 'Pro Football', category: 'Sports', imageId: 'tv9' },
+  { id: '21', name: 'TV9 Bangla', category: 'News', imageId: 'tv21' },
   { id: '10', name: 'Kids Fun', category: 'Kids', imageId: 'tv10' },
   { id: '11', name: 'Wild Life', category: 'Documentary', imageId: 'tv11' },
   { id: '12', name: 'Classic Rock', category: 'Music', imageId: 'tv12' },
@@ -41,6 +41,8 @@ export const channels: Channel[] = channelData.map(channel => {
     streamUrlString = 'https://live-bangla.akamaized.net/liveabr/playlist.m3u8';
   } else if (channel.id === '969') {
     streamUrlString = 'https://cdn-4.pishow.tv/live/969/master.m3u8';
+  } else if (channel.id === '21') {
+    streamUrlString = 'https://dyjmyiv3bp2ez.cloudfront.net/pub-iotv9banaen8yq/liveabr/playlist.m3u8';
   } else {
     const streamId = channel.id === '54161' ? '54161' : channel.id;
     streamUrlString = `https://allinonereborn.xyz/amit/host.php?id=${streamId}`;
