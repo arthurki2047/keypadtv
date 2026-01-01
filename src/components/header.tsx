@@ -2,6 +2,7 @@
 
 import { Tv, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 type HeaderProps = {
   searchTerm: string;
@@ -18,17 +19,19 @@ export function Header({ searchTerm, onSearchChange }: HeaderProps) {
             Keypad TV
           </h1>
         </div>
-        <div className="relative w-full max-w-sm">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-6 w-6 text-primary-foreground/60" />
-          <Input
-            id="search-input"
-            type="text"
-            placeholder="Search channels..."
-            value={searchTerm}
-            onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full rounded-full bg-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/60 border-2 border-transparent focus:border-accent focus:ring-accent pl-12 h-12 text-lg"
-            aria-label="Search for TV channels"
-          />
+        <div className="flex flex-col items-center w-full max-w-sm gap-2">
+            <div className="relative w-full">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-6 w-6 text-primary-foreground/60" />
+              <Input
+                id="search-input"
+                type="text"
+                placeholder="Search channels..."
+                value={searchTerm}
+                onChange={(e) => onSearchChange(e.target.value)}
+                className="w-full rounded-full bg-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/60 border-2 border-transparent focus:border-accent focus:ring-accent pl-12 h-12 text-lg"
+                aria-label="Search for TV channels"
+              />
+            </div>
         </div>
       </div>
     </header>
