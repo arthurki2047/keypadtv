@@ -24,7 +24,9 @@ export function ChannelCard({ channel, isFocused, onMouseOver }: ChannelCardProp
               className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
               data-ai-hint={channel.logoHint}
             />
-            aaakash aath
+            <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity">
+              <PlayCircle className="h-16 w-16 text-white" />
+            </div>
           </CardContent>
         </Card>
         <p className={`mt-2 text-center text-lg font-bold text-foreground truncate transition-colors ${isFocused ? 'text-primary' : ''}`}>
