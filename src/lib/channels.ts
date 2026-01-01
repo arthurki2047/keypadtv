@@ -27,6 +27,7 @@ const channelData = [
   { id: '9002', name: '9XM', category: 'Music', imageId: 'tv25' },
   { id: '1459', name: 'Goldmines', category: 'Movies', imageId: 'tv26' },
   { id: '559', name: 'Pogo', category: 'Kids', imageId: 'tv28' },
+  { id: '30', name: 'Rongeen TV', category: 'Entertainment', imageId: 'tv29' },
 ];
 
 export const channels: Channel[] = channelData.map(channel => {
@@ -67,6 +68,8 @@ export const channels: Channel[] = channelData.map(channel => {
     streamUrlString = 'https://n18syndication.akamaized.net/bpk-tv/News18_Bangla_NW18_MOB/output01/master.m3u8';
   } else if (channel.id === '559') {
     streamUrlString = 'https://mini.allinonereborn.fun/jiotv-inn/app/ts_live_559.m3u8';
+  } else if (channel.id === '30') {
+    streamUrlString = 'https://d35j504z0x2vu2.cloudfront.net/v1/manifest/0bc8e8376bd8417a1b6761138aa41c26c7309312/rongeen-tv/63387463-974d-424d-84dd-847307b4de3c/0.m3u8';
   }
    else {
     // Default or other channels

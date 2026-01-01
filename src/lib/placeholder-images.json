@@ -107,6 +107,12 @@
       "description": "Pogo channel logo",
       "imageUrl": "https://images.unsplash.com/photo-1593433363642-a69c0714c0a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjYXJ0b29uJTIwYW5pbWF0aW9ufGVufDB8fHx8MTc3MDAwMDAwMHww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "cartoon animation"
+    },
+    {
+      "id": "tv29",
+      "description": "Rongeen TV logo",
+      "imageUrl": "https://images.unsplash.com/photo-1595423805908-5689038e1b6f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtdWx0aWNvbG9yJTIwcGF0dGVybnxlbnwwfHx8fDE3NzAzODU0NDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "multicolor pattern"
     }
   ]
 }
