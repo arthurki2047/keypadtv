@@ -22,6 +22,7 @@ const channelData = [
   { id: '1143', name: 'Sangeet Bangla', category: 'Music', imageId: 'tv13' },
   { id: '14', name: 'DD India', category: 'News', imageId: 'tv14' },
   { id: '9001', name: '9X Jalwa', category: 'Music', imageId: 'tv24' },
+  { id: '9002', name: '9XM', category: 'Music', imageId: 'tv25' },
 ];
 
 export const channels: Channel[] = channelData.map(channel => {
@@ -54,6 +55,8 @@ export const channels: Channel[] = channelData.map(channel => {
     streamUrlString = 'https://cdnb4u.wiseplayout.com/B4U_Music/master.m3u8';
   } else if (channel.id === '9001') {
     streamUrlString = 'https://9xjio.wiseplayout.com/9XJALWA/master.m3u8';
+  } else if (channel.id === '9002') {
+    streamUrlString = 'https://9xjio.wiseplayout.com/9XM/master.m3u8';
   } else {
     // Default or other channels
     const streamId = channel.id === '54161' ? '54161' : channel.id;
