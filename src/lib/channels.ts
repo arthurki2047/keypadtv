@@ -64,11 +64,12 @@ export const channels: Channel[] = channelData.map(channel => {
     streamUrlString = 'https://cdn-2.pishow.tv/live/1459/master.m3u8';
   } else if (channel.id === '5001') {
     streamUrlString = 'https://n18syndication.akamaized.net/bpk-tv/News18_Bangla_NW18_MOB/output01/master.m3u8';
+  } else if (channel.id === '559') {
+    streamUrlString = 'https://mini.allinonereborn.fun/jiotv-inn/app/ts_live_559.m3u8';
   }
    else {
     // Default or other channels
-    const streamId = channel.id === '54161' ? '54161' : channel.id;
-    streamUrlString = `https://mini.allinonereborn.fun/jiotv-inn/app/ts_live_${streamId}.m3u8`;
+    streamUrlString = `https://mini.allinonereborn.fun/jiotv-inn/app/ts_live_${channel.id}.m3u8`;
   }
 
   return {
