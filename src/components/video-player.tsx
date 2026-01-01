@@ -78,7 +78,7 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
       </header>
 
       <main className="flex-1 flex items-center justify-center bg-black p-1 min-h-0">
-          <video ref={videoRef} controls className="w-full h-full max-w-full max-h-full" />
+          <video ref={videoRef} controls crossOrigin="anonymous" className="w-full h-full max-w-full max-h-full" />
       </main>
     </div>
   );
