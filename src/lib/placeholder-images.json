@@ -13,12 +13,6 @@
       "imageHint": "sports ball"
     },
     {
-      "id": "tv8",
-      "description": "Action Movies logo",
-      "imageUrl": "https://images.unsplash.com/photo-1705848533112-e9819b6af5f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxleHBsb3Npb24lMjBtb3ZpZXxlbnwwfHx8fDE3NjcwODkwMzB8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "explosion movie"
-    },
-    {
       "id": "tv9",
       "description": "Pro Football logo",
       "imageUrl": "https://images.unsplash.com/photo-1651421738652-12124d47c917?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxmb290YmFsbCUyMHN0YWRpdW18ZW58MHx8fHwxNzY2OTc4MDE4fDA&ixlib=rb-4.1.0&q=80&w=1080",

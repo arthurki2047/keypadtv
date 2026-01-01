@@ -15,7 +15,6 @@ const channelData = [
   { id: '5', name: 'Enter 10 Bangla', category: 'Entertainment', imageId: 'tv18' },
   { id: '969', name: 'Aakaash Aath', category: 'Entertainment', imageId: 'tv19' },
   { id: '7', name: 'ABP Ananda', category: 'News', imageId: 'tv15' },
-  { id: '8', name: 'Action Movies', category: 'Movies', imageId: 'tv8' },
   { id: '9', name: 'Pro Football', category: 'Sports', imageId: 'tv9' },
   { id: '10', name: 'Kids Fun', category: 'Kids', imageId: 'tv10' },
   { id: '11', name: 'Wild Life', category: 'Documentary', imageId: 'tv11' },
