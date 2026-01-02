@@ -31,6 +31,7 @@ const channelData = [
   { id: '30', name: 'Rongeen TV', category: 'Entertainment', imageId: 'tv29' },
   { id: '1473', name: 'Khushboo Bangla', category: 'Entertainment', imageId: 'tv30' },
   { id: '237', name: 'CN News', category: 'News', imageId: 'tv21' },
+  { id: 'a01v', name: 'Sun Bangla', category: 'Entertainment', imageId: 'tv31' },
 ];
 
 export const channels: Channel[] = channelData.map(channel => {
@@ -80,6 +81,8 @@ export const channels: Channel[] = channelData.map(channel => {
     streamUrlString = 'https://cdn-4.pishow.tv/live/1473/master.m3u8';
   } else if (channel.id === '237') {
     streamUrlString = 'https://cdn-2.pishow.tv/live/237/master.m3u8';
+  } else if (channel.id === 'a01v') {
+    streamUrlString = 'http://103.182.170.32:8888/play/a01v';
   }
    else {
     // Default or other channels
@@ -115,3 +118,5 @@ export function filterChannels(channels: Channel[], searchTerm: string): Channel
   const regex = new RegExp(escapedTerm, 'i');
   return channels.filter(channel => regex.test(channel.name));
 }
+
+    
