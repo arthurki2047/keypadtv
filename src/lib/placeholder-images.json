@@ -93,7 +93,7 @@
     {
       "id": "tv26",
       "description": "Goldmines logo",
-      "imageUrl": "https://images.unsplash.com/photo-1558060370-d644479cb6f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxnb2xkJTIwdHJlYXN1cmV8ZW58MHx8fHwxNzY5NDU2MjM5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1558060370-d644479cb6f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxnb2xkJTIwdHJlYXN1cmV8ZW58MHx8fHwxNzY5NDU2MjM5fDA&ixlibrb-4.1.0&q=80&w=1080",
       "imageHint": "gold treasure"
     },
     {
@@ -113,12 +113,6 @@
       "description": "Rongeen TV logo",
       "imageUrl": "https://images.unsplash.com/photo-1523821741446-edb2b68bb7a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjb2xvciUyMHNwbGFzaHxlbnwwfHx8fDE3NzgwMTI2MTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "color splash"
-    },
-    {
-      "id": "tv30",
-      "description": "Khushboo Bangla logo",
-      "imageUrl": "https://images.unsplash.com/photo-1614728263952-84ea256ec347?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjYXJ0b29uJTIwZmxvd2VyfGVufDB8fHx8MTc4MzI4Mzk0MHww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "cartoon flower"
     },
     {
       "id": "tv_default",
