@@ -26,6 +26,7 @@ const channelData = [
   { id: '9001', name: '9X Jalwa', category: 'Music', imageId: 'tv24' },
   { id: '9002', name: '9XM', category: 'Music', imageId: 'tv25' },
   { id: '1459', name: 'Goldmines', category: 'Movies', imageId: 'tv26' },
+  { id: '1461', name: 'Goldmines Movies', category: 'Movies', imageId: 'tv23' },
   { id: '559', name: 'Pogo', category: 'Kids', imageId: 'tv28' },
   { id: '30', name: 'Rongeen TV', category: 'Entertainment', imageId: 'tv29' },
   { id: '1473', name: 'Khushboo Bangla', category: 'Entertainment', imageId: 'tv30' },
@@ -67,6 +68,8 @@ export const channels: Channel[] = channelData.map(channel => {
     streamUrlString = 'https://9xjio.wiseplayout.com/9XM/master.m3u8';
   } else if (channel.id === '1459') {
     streamUrlString = 'https://cdn-2.pishow.tv/live/1459/master.m3u8';
+  } else if (channel.id === '1461') {
+    streamUrlString = 'https://cdn-2.pishow.tv/live/1461/master.m3u8';
   } else if (channel.id === '5001') {
     streamUrlString = 'https://n18syndication.akamaized.net/bpk-tv/News18_Bangla_NW18_MOB/output01/master.m3u8';
   } else if (channel.id === '559') {
