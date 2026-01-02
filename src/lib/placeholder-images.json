@@ -115,6 +115,12 @@
       "imageHint": "color splash"
     },
     {
+      "id": "tv30",
+      "description": "Khushboo Bangla logo",
+      "imageUrl": "https://images.unsplash.com/photo-1618022782728-a244c7989a8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxiZW5nYWxpJTIwcGF0dGVybnxlbnwwfHx8fDE3ODMyNzU5MzB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "bengali pattern"
+    },
+    {
       "id": "tv_default",
       "description": "Default TV logo",
       "imageUrl": "https://images.unsplash.com/photo-1593784999539-5304AC782a20?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxURVNUJTIwUEFUVEVSTnxlbnwwfHx8fDE3NzE1NDQzNjd8MA&ixlib=rb-4.1.0&q=80&w=1080",
