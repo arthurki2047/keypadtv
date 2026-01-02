@@ -82,7 +82,7 @@ export const channels: Channel[] = channelData.map(channel => {
   } else if (channel.id === '237') {
     streamUrlString = 'https://cdn-2.pishow.tv/live/237/master.m3u8';
   } else if (channel.id === 'a01v') {
-    streamUrlString = 'http://103.182.170.32:8888/play/a01v';
+    streamUrlString = 'https://prod-ent-live-gm.jiocinema.com/hls/live/2100348/hd_1080p_15000k_24fps/master.m3u8';
   }
    else {
     // Default or other channels
