@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useRef } from 'react';
@@ -5,6 +6,7 @@ import type { Channel } from '@/lib/channels';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Maximize, Tv } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 type VideoPlayerProps = {
   channel: Channel;
@@ -12,6 +14,7 @@ type VideoPlayerProps = {
 
 export function VideoPlayer({ channel }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { toast } = useToast();
   
   // Dynamically import hls.js only on the client-side
   useEffect(() => {
@@ -41,16 +44,31 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
             if (data.fatal) {
               switch(data.type) {
                 case Hls.ErrorTypes.NETWORK_ERROR:
-                  console.error('Fatal network error encountered, trying to recover', data);
+                  console.warn('Fatal network error encountered, trying to recover', data);
+                  toast({
+                    variant: "destructive",
+                    title: "Network Issue",
+                    description: "The stream is unstable. Attempting to reconnect...",
+                  });
                   hls.startLoad();
                   break;
                 case Hls.ErrorTypes.MEDIA_ERROR:
-                  console.error('Fatal media error encountered, trying to recover', data);
+                  console.warn('Fatal media error encountered, trying to recover', data);
+                   toast({
+                    variant: "destructive",
+                    title: "Playback Error",
+                    description: "A media error occurred. Attempting to recover the stream...",
+                  });
                   hls.recoverMediaError();
                   break;
                 default:
                   // cannot recover
                   console.error('Fatal HLS.js error, cannot recover', data);
+                   toast({
+                    variant: "destructive",
+                    title: "Stream Unavailable",
+                    description: "This channel could not be loaded. Please try again later.",
+                  });
                   hls.destroy();
                   break;
               }
@@ -73,7 +91,7 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
         hls.destroy();
       }
     };
-  }, [channel.streamUrl]);
+  }, [channel.streamUrl, toast]);
 
   const handleFullScreen = () => {
     if (videoRef.current) {
