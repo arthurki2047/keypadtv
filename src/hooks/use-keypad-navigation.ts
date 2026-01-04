@@ -35,7 +35,6 @@ export function useKeypadNavigation({
             lastInteraction.current = 'key';
 
             const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
-            const searchButton = document.getElementById('search-button') as HTMLButtonElement | null;
             
             if (document.activeElement === searchInput) {
                 if (e.key === 'Enter') {
@@ -44,8 +43,8 @@ export function useKeypadNavigation({
                 } else if (e.key === 'ArrowDown') {
                      e.preventDefault();
                      setFocusIndex(0);
-                } else if (!['ArrowUp', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-                    // Allow typing
+                } else if (e.key.length === 1 || e.key === 'Backspace' || e.key === 'Delete') {
+                    // Allow typing, backspace, and delete
                     return;
                 }
             }
@@ -63,11 +62,11 @@ export function useKeypadNavigation({
             switch (e.key) {
                 case 'ArrowUp':
                     e.preventDefault();
-                    if (focusIndex < columns) { 
+                    if (focusIndex < columns && focusIndex >= 0) { 
                         newIndex = SEARCH_INPUT_INDEX;
                     } else if (focusIndex === SEARCH_BUTTON_INDEX) {
                         newIndex = SEARCH_INPUT_INDEX;
-                    } else {
+                    } else if (focusIndex >= 0) {
                         newIndex = focusIndex - columns;
                     }
                     break;
@@ -95,23 +94,20 @@ export function useKeypadNavigation({
                     e.preventDefault();
                     if (focusIndex >= 0) {
                       onEnter(focusIndex);
-                    } else if (focusIndex === SEARCH_INPUT_INDEX && searchButton) {
-                        handleSearchSubmit();
-                    } else if (focusIndex === SEARCH_BUTTON_INDEX && searchButton) {
+                    } else if (focusIndex === SEARCH_INPUT_INDEX) {
                         handleSearchSubmit();
                     }
                     return;
                 default:
                     // For any other key, if the search input is not focused, focus it and start typing.
                     if (searchInput && document.activeElement !== searchInput && e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
-                        searchInput.value += e.key;
                         searchInput.focus();
-                        e.preventDefault();
+                        // The browser will handle the typing
                     }
                     return;
             }
 
-            if (newIndex >= -2 && newIndex < itemCount) {
+            if (newIndex >= -1 && newIndex < itemCount) {
                 setFocusIndex(newIndex);
             }
         };
@@ -119,7 +115,7 @@ export function useKeypadNavigation({
         const handleSearchSubmit = () => {
             const searchButton = document.getElementById('search-button') as HTMLButtonElement | null;
             if (searchButton) {
-                searchButton.click();
+                searchButton.form?.requestSubmit();
             }
         };
 
