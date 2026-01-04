@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Tv, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -17,14 +17,14 @@ export function Header({ allChannels }: HeaderProps) {
   const [searchTerm, setSearchTerm] = useState(searchParams.get('q') || '');
 
   useEffect(() => {
-    // If the user navigates back to a non-search page, clear the search term
     const query = searchParams.get('q');
     if (query === null && searchTerm !== '') {
         setSearchTerm('');
     }
   }, [searchParams, searchTerm]);
 
-  const handleSearchSubmit = () => {
+  const handleSearchSubmit = (e: FormEvent) => {
+    e.preventDefault();
     if (searchTerm.trim()) {
       router.push(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
     } else {
@@ -50,7 +50,7 @@ export function Header({ allChannels }: HeaderProps) {
           </h1>
         </a>
         <div className="flex flex-col items-center w-full max-w-sm gap-2">
-            <form onSubmit={(e) => { e.preventDefault(); handleSearchSubmit(); }} className="relative w-full">
+            <form onSubmit={handleSearchSubmit} className="relative w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-6 w-6 text-primary-foreground/60" />
               <Input
                 id="search-input"
