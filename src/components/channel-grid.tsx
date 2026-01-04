@@ -20,6 +20,12 @@ export function ChannelGrid({ allChannels }: ChannelGridProps) {
   const gridRef = useRef<HTMLDivElement>(null);
 
   const [columns, setColumns] = useState(4);
+  const [isStandalone, setIsStandalone] = useState(false);
+
+  useEffect(() => {
+    // This code now runs only on the client
+    setIsStandalone(!document.querySelector('section'));
+  }, []);
 
   useEffect(() => {
     const updateColumns = () => {
@@ -36,9 +42,10 @@ export function ChannelGrid({ allChannels }: ChannelGridProps) {
   }, []);
 
   const filteredChannels = useMemo(() => {
+    if (!isStandalone) return allChannels;
     const termToFilter = submittedSearchTerm || searchTerm;
     return filterChannels(allChannels, termToFilter);
-  }, [allChannels, searchTerm, submittedSearchTerm]);
+  }, [allChannels, searchTerm, submittedSearchTerm, isStandalone]);
   
   useEffect(() => {
     setFocusIndex(0);
@@ -58,6 +65,7 @@ export function ChannelGrid({ allChannels }: ChannelGridProps) {
     onEnter,
     focusIndex,
     setFocusIndex,
+    disable: !isStandalone
   });
 
   const handleSearchSubmit = () => {
@@ -70,9 +78,9 @@ export function ChannelGrid({ allChannels }: ChannelGridProps) {
     setFocusIndex(0);
   };
   
-  return (
-    <div className="min-h-screen flex flex-col">
-      <Header 
+  const content = (
+    <>
+      {isStandalone && <Header 
         searchTerm={searchTerm} 
         onSearchChange={(v) => {
           setSearchTerm(v);
@@ -81,7 +89,7 @@ export function ChannelGrid({ allChannels }: ChannelGridProps) {
           }
         }}
         onSearchSubmit={handleSearchSubmit}
-      />
+      />}
       <main className="flex-grow container mx-auto p-4 md:p-8">
         {filteredChannels.length > 0 ? (
           <div
@@ -93,19 +101,28 @@ export function ChannelGrid({ allChannels }: ChannelGridProps) {
               <ChannelCard 
                 key={channel.id} 
                 channel={channel} 
-                isFocused={index === focusIndex}
+                isFocused={isStandalone && index === focusIndex}
                 onMouseOver={() => handleMouseOver(index)}
               />
             ))}
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center h-[50vh] text-center">
+          isStandalone && <div className="flex flex-col items-center justify-center h-[50vh] text-center">
             <p className="text-2xl font-semibold text-muted-foreground">No channels found.</p>
             <p className="text-lg text-muted-foreground">Try a different search term.</p>
           </div>
         )}
       </main>
-      
-    </div>
+    </>
   );
+
+  if (isStandalone) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        {content}
+      </div>
+    )
+  }
+  
+  return content;
 }

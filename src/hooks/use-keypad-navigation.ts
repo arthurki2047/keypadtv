@@ -10,6 +10,7 @@ type UseKeypadNavigationProps = {
   focusIndex: number;
   setFocusIndex: (index: number) => void;
   loop?: boolean;
+  disable?: boolean;
 };
 
 // Focus constants
@@ -24,10 +25,12 @@ export function useKeypadNavigation({
   focusIndex,
   setFocusIndex,
   loop = true,
+  disable = false,
 }: UseKeypadNavigationProps) {
     const lastInteraction = useRef<'key' | 'mouse'>('mouse');
 
     useEffect(() => {
+        if (disable) return;
         const handleKeyDown = (e: KeyboardEvent) => {
             lastInteraction.current = 'key';
             let newIndex = focusIndex;
@@ -106,10 +109,10 @@ export function useKeypadNavigation({
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, [focusIndex, setFocusIndex, itemCount, columns, onEnter, gridRef, loop]);
+    }, [focusIndex, setFocusIndex, itemCount, columns, onEnter, gridRef, loop, disable]);
 
     useEffect(() => {
-        if (lastInteraction.current === 'mouse') return;
+        if (disable || lastInteraction.current === 'mouse') return;
 
         const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
         const searchButton = document.getElementById('search-button') as HTMLButtonElement | null;
@@ -135,9 +138,10 @@ export function useKeypadNavigation({
                 focusableElement.focus();
             }
         }
-    }, [focusIndex, gridRef, itemCount]);
+    }, [focusIndex, gridRef, itemCount, disable]);
 
     const handleMouseOver = (index: number) => {
+      if (disable) return;
       lastInteraction.current = 'mouse';
       setFocusIndex(index);
     };
