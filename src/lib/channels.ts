@@ -136,9 +136,3 @@ export function filterChannels(channels: Channel[], searchTerm: string): Channel
   const regex = new RegExp(escapedTerm, 'i');
   return channels.filter(channel => regex.test(channel.name));
 }
-
-    
-    
-    
-
-    
