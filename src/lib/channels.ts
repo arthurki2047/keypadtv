@@ -36,6 +36,7 @@ const channelData = [
   { id: 'b4u_kadak', name: 'B4U Kadak', category: 'Movies', imageId: 'tv32' },
   { id: 'b4u_movies', name: 'B4U Movies', category: 'Movies', imageId: 'tv33' },
   { id: '9', name: 'DD Kisan', category: 'Infotainment', imageId: 'tv34' },
+  { id: 'zoom', name: 'Zoom', category: 'Music', imageId: 'tv35' },
 ];
 
 export const channels: Channel[] = channelData.map(channel => {
@@ -95,6 +96,8 @@ export const channels: Channel[] = channelData.map(channel => {
     streamUrlString = 'https://cdnb4u.wiseplayout.com/B4U_Movies/HD720/HD720.m3u8';
   } else if (channel.id === '9') {
     streamUrlString = 'https://cdn-6.pishow.tv/live/9/9_0.m3u8';
+  } else if (channel.id === 'zoom') {
+    streamUrlString = 'https://dai.google.com/linear/hls/pb/event/JCAm25qkRXiKcK1AJMlvKQ/stream/ba44d90c-4f66-4716-814f-a0998e7e71ca:TPE2/variant/b747bf7f16eca8387cf3b154486dd818/bandwidth/1628000.m3u8';
   }
    else {
     // Default or other channels
@@ -105,7 +108,7 @@ export const channels: Channel[] = channelData.map(channel => {
   let logoHint = imageData?.imageHint || defaultImageData?.imageHint || '';
 
   if (channel.id === '1473') {
-    logoUrl = `data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGNpcmNsZSBjeD0iMTAwIiBjeT0iMTAwIiByPSI5MCIgZmlsbD0iI2ZmNzA0MyIgc3Ryb2tlPSIjZmY5OTMzIiBzdHJva2Utd2lkdGg9IjEwIiAvPgogIDxwYXRoIGQ9Ik0xMDAsMzUgQzEwMCwzNSAxMTUsNjAgMTM1LDYwIEMxNTUsNjAgMTY1LDQ1IDE2NSwzNSBDMTY1LDI1IDE1NSwxNSAxMzUsMTUgQzExNSwxNSAxMDAsMjUgMTAwLDM1IFoiIGZpbGw9IiNmZmYiIHRyYW5zZm9ybT0icm90YXRlKDAsIDEwMCwgMTAwKSIgLz4KICA8cGF0aCBkPSJNMTAwLDM1IEMxMDAsMzUgMTE1LDYwIDEzNSw2MCBDMTU1LDYwIDE2NSw0NSAxNjUsMzUgQzE2NSwyNSAxNTUsMTUgMTM1LDE1IEMxMTUsMTUgMTAwLDI1IDEwMCwzNSBaIiBmaWxsPSIjZmZmIiB0cmFuc2Zvcm09InJvdGF0ZSg3MiwgMTAwLCAxMDApIiAvPgogIDxwYXRoIGQ9Ik0xMDAsMzUgQzEwMCwzNSAxMTUsNjAgMTM1LDYwIEMxNTUsNjAgMTY1LDQ5IDE2NSwzNSBDMTY1LDI1IDE1NSwxNSAxMzUsMTUgQzExNSwxNSAxMDAsMjUgMTAwLDM1IFoiIGZpbGw9IiNmZmYiIHRyYW5zZm9ybT0icm90YXRlKDE0NCwgMTAwLCAxMDApIiAvPgogIDxwYXRoIGQ9Ik0xMDAsMzUgQzEwMCwzNSAxMTUsNjAgMTM1LDYwIEMxNTUsNjAgMTY1LDQ1IDE2NSwzNSBDMTY1LDI1IDE1NSwxNSAxMzUsMTUgQzExNSwxNSAxMDAsMjUgMTAwLDM1IFoiIGZpbGw9IiNmZmYiIHRyYW5zZm9ybT0icm90YXRlKDIxNiwgMTAwLCAxMDApIiAvPgogIDxwYXRoIGQ9Ik0xMDAsMzUgQzEwMCwzNSAxMTUsNjAgMTM1LDYwIEMxNTUsNjAgMTY1LDQ1IDE2NSwzNSBDMTY1LDI1IDE1NSwxNSAxMzUsMTUgQzExNSwxNSAxMDAsMjUgMTAwLDM1IFoiIGZpbGw9IiNmZmYiIHRyYW5zZm9ybT0icm90YXRlKDI4OCwgMTAwLCAxMDApIiAvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iMzAiIGZpbGw9IiNmZmYiIC8+Cjwvc3ZnPg==`;
+    logoUrl = `data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGNpcmNsZSBjeD0iMTAwIiBjeT0iMTAwIiByPSI5MCIgZmlsbD0iI2ZmNzA0MyIgc3Ryb2tlPSIjZmY5OTMzIiBzdHJva2Utd2lkdGg9IjEwIiAvPgogIDxwYXRoIGQ9Ik0xMDAsMzUgQzEwMCwzNSAxMTUsNjAgMTM1LDYwIEMxNTUsNjAgMTY1LDQ1IDE2NSwzNSBDMTY1LDI1IDE1NSwxNSAxMzUsMTUgQzExNSwxNSAxMDAsMjUgMTAwLDM1IFoiIGZpbGw9IiNmZmYiIHRyYW5zZm9ybT0icm90YXRlKDAsIDEwMCwgMTAwKSIgLz4KICA8cGF0aCBkPSJNMTAwLDM1IEMxMDAsMzUgMTE1LDYwIDEzNSw2MCBDMTU1LDYwIDE2NSw0NSAxNjUsMzUgQzE2NSwyNSAxNTUsMTUgMTM1LDE1IEMxMTUsMTUgMTAwLDIUgMTAwLDM1IFoiIGZpbGw9IiNmZmYiIHRyYW5zZm9ybT0icm90YXRlKDcyLCAxMDAsIDEwMCkiIC8+CiAgPHBhdGggZD0iTTk2LDM1IEM5NiwzNSAxMTUsNjAgMTM1LDYwIEMxNTUsNjAgMTY1LDQ5IDE2NSwzNSBDMTY1LDI1IDE1NSwxNSAxMzUsMTUgQzExNSwxNSAxMDAsMjUgOTYsMzUgWiIgZmlsbD0iI2ZmZiIgdHJhbnNmb3JtPSJyb3RhdGUoMTQ0LCAxMDAsIDEwMCkiIC8+CiAgPHBhdGggZD0iTTk2LDM1IEM5NiwzNSAxMTUsNjAgMTM1LDYwIEMxNTUsNjAgMTY1LDQ1IDE2NSwzNSBDMTY1LDI1IDE1NSwxNSAxMzUsMTUgQzExNSwxNSAxMDAsMjUgOTYsMzUgWiIgZmlsbD0iI2ZmZiIgdHJhbnNmb3JtPSJyb3RhdGUoMjE2LCAxMDAsIDEwMCkiIC8+CiAgPHBhdGggZD0iTTk2LDM1IEM5NiwzNSAxMTUsNjAgMTM1LDYwIEMxNTUsNjAgMTY1LDQ1IDE2NSwzNSBDMTY1LDI1IDE1NSwxNSAxMzUsMTUgQzExNSwxNSAxMDAsMjUgOTYsMzUgWiIgZmlsbD0iI2ZmZiIgdHJhbnNmb3JtPSJyb3RhdGUoMjg4LCAxMDAsIDEwMCkiIC8+CiAgPGNpcmNsZSBjeD0iMTAwIiBjeT0iMTAwIiByPSIzMCIgZmlsbD0iI2ZmZiIgLz4KPC9zdmc+`;
     logoHint = 'flower logo';
   }
 
@@ -131,4 +134,5 @@ export function filterChannels(channels: Channel[], searchTerm: string): Channel
   return channels.filter(channel => regex.test(channel.name));
 }
 
+    
     
