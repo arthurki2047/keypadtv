@@ -36,6 +36,7 @@ const channelData = [
   { id: 'b4u_movies', name: 'B4U Movies', category: 'Movies', imageId: 'tv33' },
   { id: '9', name: 'DD Kisan', category: 'Infotainment', imageId: 'tv34' },
   { id: 'zoom', name: 'Zoom', category: 'Music', imageId: 'tv35' },
+  { id: 'zillar_barta', name: 'Zillar Barta', category: 'News', imageId: 'tv21' },
 ];
 
 export const channels: Channel[] = channelData.map(channel => {
@@ -95,8 +96,9 @@ export const channels: Channel[] = channelData.map(channel => {
     streamUrlString = 'https://cdn-6.pishow.tv/live/9/9_0.m3u8';
   } else if (channel.id === 'zoom') {
     streamUrlString = 'https://dai.google.com/linear/hls/pb/event/JCAm25qkRXiKcK1AJMlvKQ/stream/ba44d90c-4f66-4716-814f-a0998e7e71ca:TPE2/variant/b747bf7f16eca8387cf3b154486dd818/bandwidth/1628000.m3u8';
-  }
-   else {
+  } else if (channel.id === 'zillar_barta') {
+    streamUrlString = 'https://server.zillarbarta.com/zillarbarta/tracks-v1a1/mono.ts.m3u8';
+  } else {
     // Default or other channels
     streamUrlString = `https://mini.allinonereborn.fun/jiotv-inn/app/ts_live_${channel.id}.m3u8`;
   }
@@ -124,7 +126,7 @@ function escapeRegExp(string: string) {
 
 export function filterChannels(channels: Channel[], searchTerm: string): Channel[] {
   if (!searchTerm) {
-    return [];
+    return channels;
   }
   const escapedTerm = escapeRegExp(searchTerm.toLowerCase());
   const regex = new RegExp(escapedTerm, 'i');
