@@ -32,6 +32,7 @@ const channelData = [
   { id: '1473', name: 'Khushboo Bangla', category: 'Entertainment', imageId: 'tv30' },
   { id: '237', name: 'CN News', category: 'News', imageId: 'tv21' },
   { id: 'a01v', name: 'Sun Bangla', category: 'Entertainment', imageId: 'tv31' },
+  { id: '1001', name: 'Ananda Barta', category: 'News', imageId: 'tv21' },
 ];
 
 export const channels: Channel[] = channelData.map(channel => {
@@ -83,6 +84,8 @@ export const channels: Channel[] = channelData.map(channel => {
     streamUrlString = 'https://cdn-2.pishow.tv/live/237/master.m3u8';
   } else if (channel.id === 'a01v') {
     streamUrlString = 'https://cdn-4.pishow.tv/live/1471/master.m3u8';
+  } else if (channel.id === '1001') {
+    streamUrlString = 'https://account19.livebox.co.in/Anandabarta2hls/live.m3u8';
   }
    else {
     // Default or other channels
