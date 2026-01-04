@@ -25,7 +25,7 @@ export default function Home() {
           <h2 className="container mx-auto px-4 md:px-8 text-2xl md:text-3xl font-bold text-primary mb-4">
             News
           </h2>
-          <ChannelGrid allChannels={newsChannels} />
+          <ChannelGrid channels={newsChannels} />
         </section>
       )}
 
@@ -34,7 +34,7 @@ export default function Home() {
            <h2 className="container mx-auto px-4 md:px-8 text-2xl md:text-3xl font-bold text-primary mb-4">
             All Channels
           </h2>
-          <ChannelGrid allChannels={otherChannels} />
+          <ChannelGrid channels={otherChannels} />
         </section>
       )}
     </div>
