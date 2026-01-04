@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, FormEvent } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { Tv, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -13,25 +13,29 @@ type HeaderProps = {
 
 export function Header({ allChannels }: HeaderProps) {
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useState(searchParams.get('q') || '');
 
   useEffect(() => {
     const query = searchParams.get('q');
-    if (query === null && searchTerm !== '') {
+    if (pathname !== '/search' && query === null && searchTerm !== '') {
         setSearchTerm('');
     }
-  }, [searchParams, searchTerm]);
+  }, [pathname, searchParams, searchTerm]);
 
   const handleSearchSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (searchTerm.trim()) {
-      router.push(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
+    const trimmedTerm = searchTerm.trim();
+    if (trimmedTerm) {
+      router.push(`/search?q=${encodeURIComponent(trimmedTerm)}`);
     } else {
-      router.push('/');
+      if (pathname === '/search') {
+        router.push('/');
+      }
     }
     const searchInput = document.getElementById('search-input');
-    if (searchInput) {
+    if (searchInput instanceof HTMLElement) {
       searchInput.blur();
     }
   };
