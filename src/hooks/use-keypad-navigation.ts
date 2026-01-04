@@ -37,17 +37,17 @@ export function useKeypadNavigation({
 
             const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
             const searchButton = document.getElementById('search-button') as HTMLButtonElement | null;
-            const isSearchActive = document.activeElement === searchInput || document.activeElement === searchButton;
-
+            
             if (document.activeElement === searchInput && !['ArrowDown', 'Enter'].includes(e.key)) {
-                return; // Allow typing in search
+                return; // Allow typing in search and only navigate on ArrowDown or Enter
             }
-             if (e.target instanceof HTMLInputElement && e.key !== 'Enter') {
-                if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-                    (e.target as HTMLElement).blur();
-                } else {
-                     return;
-                }
+            
+            if (e.target instanceof HTMLInputElement && e.key !== 'Enter' && !['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                return; // If it's another input, let it handle its own typing
+            }
+            
+            if (e.target instanceof HTMLInputElement && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                (e.target as HTMLElement).blur();
             }
 
 
