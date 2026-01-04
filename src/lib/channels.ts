@@ -31,13 +31,11 @@ const channelData = [
   { id: '30', name: 'Rongeen TV', category: 'Entertainment', imageId: 'tv29' },
   { id: '1473', name: 'Khushboo Bangla', category: 'Entertainment', imageId: 'tv30' },
   { id: '237', name: 'CN News', category: 'News', imageId: 'tv21' },
-  { id: 'a01v', name: 'Sun Bangla', category: 'Entertainment', imageId: 'tv31' },
   { id: '1001', name: 'Ananda Barta', category: 'News', imageId: 'tv21' },
   { id: 'b4u_kadak', name: 'B4U Kadak', category: 'Movies', imageId: 'tv32' },
   { id: 'b4u_movies', name: 'B4U Movies', category: 'Movies', imageId: 'tv33' },
   { id: '9', name: 'DD Kisan', category: 'Infotainment', imageId: 'tv34' },
   { id: 'zoom', name: 'Zoom', category: 'Music', imageId: 'tv35' },
-  { id: 'zbc', name: 'ZB cartoon', category: 'Cartoon', imageId: 'tv36' },
 ];
 
 export const channels: Channel[] = channelData.map(channel => {
@@ -87,8 +85,6 @@ export const channels: Channel[] = channelData.map(channel => {
     streamUrlString = 'https://cdn-4.pishow.tv/live/1473/master.m3u8';
   } else if (channel.id === '237') {
     streamUrlString = 'https://cdn-2.pishow.tv/live/237/master.m3u8';
-  } else if (channel.id === 'a01v') {
-    streamUrlString = 'https://sund-s.akamaized.net/hls/live/2026528/sunbangla/master.m3u8';
   } else if (channel.id === '1001') {
     streamUrlString = 'https://account19.livebox.co.in/Anandabarta2hls/live.m3u8';
   } else if (channel.id === 'b4u_kadak') {
@@ -99,8 +95,6 @@ export const channels: Channel[] = channelData.map(channel => {
     streamUrlString = 'https://cdn-6.pishow.tv/live/9/9_0.m3u8';
   } else if (channel.id === 'zoom') {
     streamUrlString = 'https://dai.google.com/linear/hls/pb/event/JCAm25qkRXiKcK1AJMlvKQ/stream/ba44d90c-4f66-4716-814f-a0998e7e71ca:TPE2/variant/b747bf7f16eca8387cf3b154486dd818/bandwidth/1628000.m3u8';
-  } else if (channel.id === 'zbc') {
-    streamUrlString = 'https://server.zillarbarta.com/zbcatun/tracks-v1a1/mono.ts.m3u8';
   }
    else {
     // Default or other channels
@@ -130,7 +124,7 @@ function escapeRegExp(string: string) {
 
 export function filterChannels(channels: Channel[], searchTerm: string): Channel[] {
   if (!searchTerm) {
-    return channels;
+    return [];
   }
   const escapedTerm = escapeRegExp(searchTerm.toLowerCase());
   const regex = new RegExp(escapedTerm, 'i');
