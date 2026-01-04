@@ -13,8 +13,9 @@ export default function Home() {
   }, {} as Record<string, typeof allChannels>);
 
   const newsChannels = categories['News'] || [];
+  const musicChannels = categories['Music'] || [];
   const otherChannels = Object.entries(categories)
-    .filter(([category]) => category !== 'News')
+    .filter(([category]) => category !== 'News' && category !== 'Music')
     .flatMap(([, channels]) => channels);
 
 
@@ -29,9 +30,18 @@ export default function Home() {
         </section>
       )}
 
+      {musicChannels.length > 0 && (
+        <section>
+          <h2 className="container mx-auto px-4 md:px-8 text-2xl md:text-3xl font-bold text-primary mb-4">
+            Music
+          </h2>
+          <ChannelGrid channels={musicChannels} />
+        </section>
+      )}
+
       {otherChannels.length > 0 && (
         <section>
-           <h2 className="container mx-auto px-4 md:px-8 text-2xl md:text-3xl font-bold text-primary mb-4">
+           <h2 className="container mx-auto px-4 md_px-8 text-2xl md:text-3xl font-bold text-primary mb-4">
             All Channels
           </h2>
           <ChannelGrid channels={otherChannels} />
