@@ -12,7 +12,7 @@ type ChannelGridProps = {
 };
 
 export function ChannelGrid({ channels, isSearchResults = false }: ChannelGridProps) {
-  const [focusIndex, setFocusIndex] = useState(0);
+  const [focusIndex, setFocusIndex] = useState(isSearchResults ? 0 : -1);
   const router = useRouter();
   const gridRef = useRef<HTMLDivElement>(null);
   const [columns, setColumns] = useState(4);
@@ -45,7 +45,7 @@ export function ChannelGrid({ channels, isSearchResults = false }: ChannelGridPr
     onEnter,
     focusIndex,
     setFocusIndex,
-    disable: !isSearchResults
+    disable: false // Always enable keypad nav
   });
 
   return (
@@ -60,7 +60,7 @@ export function ChannelGrid({ channels, isSearchResults = false }: ChannelGridPr
             <ChannelCard
               key={channel.id}
               channel={channel}
-              isFocused={isSearchResults && index === focusIndex}
+              isFocused={index === focusIndex}
               onMouseOver={() => handleMouseOver(index)}
             />
           ))}

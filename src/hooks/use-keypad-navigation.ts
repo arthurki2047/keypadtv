@@ -33,17 +33,23 @@ export function useKeypadNavigation({
         if (disable) return;
         const handleKeyDown = (e: KeyboardEvent) => {
             lastInteraction.current = 'key';
-            let newIndex = focusIndex;
 
             const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
             const searchButton = document.getElementById('search-button') as HTMLButtonElement | null;
             
-            if (document.activeElement === searchInput && !['ArrowDown', 'Enter'].includes(e.key)) {
-                return; // Allow typing in search and only navigate on ArrowDown or Enter
+            if (document.activeElement === searchInput) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleSearchSubmit();
+                } else if (e.key === 'ArrowDown') {
+                     e.preventDefault();
+                     setFocusIndex(0);
+                }
+                return; 
             }
             
             if (e.target instanceof HTMLInputElement && e.key !== 'Enter' && !['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-                return; // If it's another input, let it handle its own typing
+                return;
             }
             
             if (e.target instanceof HTMLInputElement && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
@@ -51,10 +57,11 @@ export function useKeypadNavigation({
             }
 
 
+            let newIndex = focusIndex;
             switch (e.key) {
                 case 'ArrowUp':
                     e.preventDefault();
-                    if (focusIndex < columns) { // Top row of grid
+                    if (focusIndex < columns) { 
                         newIndex = SEARCH_INPUT_INDEX;
                     } else if (focusIndex === SEARCH_BUTTON_INDEX) {
                         newIndex = SEARCH_INPUT_INDEX;
@@ -65,10 +72,7 @@ export function useKeypadNavigation({
                 case 'ArrowDown':
                     e.preventDefault();
                     if (focusIndex === SEARCH_INPUT_INDEX) {
-                        if (searchButton) newIndex = SEARCH_BUTTON_INDEX;
-                        else newIndex = 0;
-                    } else if (focusIndex === SEARCH_BUTTON_INDEX) {
-                        newIndex = 0; // Go to first grid item
+                        newIndex = 0;
                     } else {
                         newIndex = focusIndex + columns;
                     }
@@ -90,17 +94,29 @@ export function useKeypadNavigation({
                     if (focusIndex >= 0) {
                       onEnter(focusIndex);
                     } else if (focusIndex === SEARCH_INPUT_INDEX && searchButton) {
-                        searchButton.click();
+                        handleSearchSubmit();
                     } else if (focusIndex === SEARCH_BUTTON_INDEX && searchButton) {
-                        searchButton.click();
+                        handleSearchSubmit();
                     }
                     return;
                 default:
+                    // For any other key, if the search input is not focused, focus it and start typing.
+                    if (searchInput && document.activeElement !== searchInput && e.key.length === 1) {
+                        searchInput.focus();
+                    }
                     return;
             }
 
             if (newIndex >= -2 && newIndex < itemCount) {
                 setFocusIndex(newIndex);
+            }
+        };
+
+        const handleSearchSubmit = () => {
+            const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+            const searchButton = document.getElementById('search-button') as HTMLButtonElement | null;
+            if (searchButton && searchInput && searchInput.value.trim()) {
+                searchButton.click();
             }
         };
 
@@ -115,14 +131,9 @@ export function useKeypadNavigation({
         if (disable || lastInteraction.current === 'mouse') return;
 
         const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
-        const searchButton = document.getElementById('search-button') as HTMLButtonElement | null;
-
+        
         if (focusIndex === SEARCH_INPUT_INDEX) {
             searchInput?.focus();
-            return;
-        }
-        if (focusIndex === SEARCH_BUTTON_INDEX) {
-            searchButton?.focus();
             return;
         }
         
