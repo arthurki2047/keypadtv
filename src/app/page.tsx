@@ -14,8 +14,10 @@ export default function Home() {
 
   const newsChannels = categories['News'] || [];
   const musicChannels = categories['Music'] || [];
+  const movieChannels = categories['Movies'] || [];
+  const cartoonChannels = categories['Cartoon'] || [];
   const otherChannels = Object.entries(categories)
-    .filter(([category]) => category !== 'News' && category !== 'Music')
+    .filter(([category]) => !['News', 'Music', 'Movies', 'Cartoon'].includes(category))
     .flatMap(([, channels]) => channels);
 
 
@@ -39,6 +41,24 @@ export default function Home() {
         </section>
       )}
 
+      {movieChannels.length > 0 && (
+        <section>
+          <h2 className="container mx-auto px-4 md:px-8 text-2xl md:text-3xl font-bold text-primary mb-4">
+            Movies
+          </h2>
+          <ChannelGrid channels={movieChannels} />
+        </section>
+      )}
+
+      {cartoonChannels.length > 0 && (
+        <section>
+          <h2 className="container mx-auto px-4 md:px-8 text-2xl md:text-3xl font-bold text-primary mb-4">
+            Cartoon
+          </h2>
+          <ChannelGrid channels={cartoonChannels} />
+        </section>
+      )}
+
       {otherChannels.length > 0 && (
         <section>
            <h2 className="container mx-auto px-4 md_px-8 text-2xl md:text-3xl font-bold text-primary mb-4">
@@ -50,3 +70,5 @@ export default function Home() {
     </div>
   );
 }
+
+    

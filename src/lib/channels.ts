@@ -27,7 +27,7 @@ const channelData = [
   { id: '9002', name: '9XM', category: 'Music', imageId: 'tv25' },
   { id: '1459', name: 'Goldmines', category: 'Movies', imageId: 'tv26' },
   { id: '1461', name: 'Goldmines Movies', category: 'Movies', imageId: 'tv18' },
-  { id: '559', name: 'Pogo', category: 'Kids', imageId: 'tv28' },
+  { id: '559', name: 'Pogo', category: 'Cartoon', imageId: 'tv28' },
   { id: '30', name: 'Rongeen TV', category: 'Entertainment', imageId: 'tv29' },
   { id: '1473', name: 'Khushboo Bangla', category: 'Entertainment', imageId: 'tv30' },
   { id: '237', name: 'CN News', category: 'News', imageId: 'tv21' },
@@ -37,7 +37,7 @@ const channelData = [
   { id: 'b4u_movies', name: 'B4U Movies', category: 'Movies', imageId: 'tv33' },
   { id: '9', name: 'DD Kisan', category: 'Infotainment', imageId: 'tv34' },
   { id: 'zoom', name: 'Zoom', category: 'Music', imageId: 'tv35' },
-  { id: 'zbc', name: 'ZB cartoon', category: 'Kids', imageId: 'tv36' },
+  { id: 'zbc', name: 'ZB cartoon', category: 'Cartoon', imageId: 'tv36' },
 ];
 
 export const channels: Channel[] = channelData.map(channel => {
@@ -139,4 +139,6 @@ export function filterChannels(channels: Channel[], searchTerm: string): Channel
 
     
     
+    
+
     
