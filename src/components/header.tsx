@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, FormEvent } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { Tv, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -17,25 +17,29 @@ export function Header({ allChannels }: HeaderProps) {
   const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useState(searchParams.get('q') || '');
 
+  // Syncs the input field with the URL query parameter
   useEffect(() => {
-    const query = searchParams.get('q');
-    if (pathname !== '/search' && query === null) {
-        setSearchTerm('');
-    } else if (query) {
-        setSearchTerm(query);
-    }
-  }, [pathname, searchParams]);
+    const query = searchParams.get('q') || '';
+    setSearchTerm(query);
+  }, [searchParams]);
 
-  const handleSearchSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    const trimmedTerm = searchTerm.trim();
-    if (trimmedTerm) {
-      router.push(`/search?q=${encodeURIComponent(trimmedTerm)}`);
-    } else {
-      if (pathname === '/search') {
-        router.push('/');
-      }
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newSearchTerm = e.target.value;
+    setSearchTerm(newSearchTerm);
+    
+    if (newSearchTerm.trim()) {
+      // If there's a search term, navigate to the search page
+      router.push(`/search?q=${encodeURIComponent(newSearchTerm)}`);
+    } else if (pathname === '/search') {
+      // If the search term is cleared and we are on the search page, go back to the homepage
+      router.push('/');
     }
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    // Prevent default form submission to avoid a full page reload.
+    // The navigation is already handled by handleSearchChange.
+    e.preventDefault();
     const searchInput = document.getElementById('search-input');
     if (searchInput instanceof HTMLElement) {
       searchInput.blur();
@@ -52,14 +56,14 @@ export function Header({ allChannels }: HeaderProps) {
           </h1>
         </a>
         <div className="flex flex-col items-center w-full max-w-sm gap-2">
-            <form onSubmit={handleSearchSubmit} className="relative w-full">
+            <form onSubmit={handleFormSubmit} className="relative w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-6 w-6 text-muted-foreground" />
               <Input
                 id="search-input"
                 type="text"
                 placeholder="Search channels..."
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={handleSearchChange}
                 className="w-full rounded-full bg-background text-foreground placeholder:text-muted-foreground border-2 border-input focus:border-accent focus:ring-accent pl-12 h-12 text-lg"
                 aria-label="Search for TV channels"
               />
