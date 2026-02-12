@@ -115,12 +115,6 @@
       "imageHint": "color splash"
     },
     {
-      "id": "tv31",
-      "description": "Sun Bangla logo",
-      "imageUrl": "https://images.unsplash.com/photo-1524587373977-195c1a7983b6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxnb2xkZW4lMjBzdW58ZW58MHx8fHwxNzgwOTMxMjQyfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "golden sun"
-    },
-    {
       "id": "tv32",
       "description": "B4U Kadak logo",
       "imageUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtb3ZpZSUyMHN0aWxsfGVufDB8fHx8MTc5ODI0MzU1NHww&ixlib=rb-4.1.0&q=80&w=1080",
@@ -129,8 +123,8 @@
     {
       "id": "tv33",
       "description": "B4U Movies logo",
-      "imageUrl": "https://images.unsplash.com/photo-1595753457199-a6a3377727e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjaW5lbWElMjBzZWF0c3xlbnwwfHx8fDE3OTgyNDM1ODV8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "cinema seats"
+      "imageUrl": "https://images.unsplash.com/photo-1485846234645-a62644f84728?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtb3ZpZXxlbnwwfHx8fDE3NzA4ODc2Mzl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "movie theater"
     },
     {
       "id": "tv34",
