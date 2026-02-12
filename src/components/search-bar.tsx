@@ -2,39 +2,9 @@
 
 import { useState, useEffect, ChangeEvent } from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
-import { Search, ChevronDown } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { getSortedCategories } from '@/lib/channels';
-import Link from 'next/link';
-
-function CategoriesDropdown() {
-    const sortedCategories = getSortedCategories();
-
-    return (
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="text-muted-foreground hover:bg-accent/10 focus:ring-accent focus:ring-2 rounded-full px-4">
-                    Categories
-                    <ChevronDown className="ml-2 h-4 w-4" />
-                </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-                {sortedCategories.map(([category]) => (
-                    <DropdownMenuItem key={category} asChild>
-                        <Link href={`/#${category.toLowerCase()}`}>{category}</Link>
-                    </DropdownMenuItem>
-                ))}
-            </DropdownMenuContent>
-        </DropdownMenu>
-    );
-}
 
 export function SearchBar() {
   const router = useRouter();
@@ -79,9 +49,6 @@ export function SearchBar() {
             className="w-full bg-transparent text-foreground placeholder:text-muted-foreground border-0 focus:ring-0 pl-12 h-11 text-lg"
             aria-label="Search for TV channels"
           />
-          <div className="pr-2 hidden md:block">
-            <CategoriesDropdown />
-          </div>
           <Button type="submit" id="search-button" className="sr-only" aria-label="Submit search">Search</Button>
         </form>
     </div>
