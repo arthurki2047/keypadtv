@@ -11,13 +11,11 @@ export default function Home() {
     <div className="flex flex-col gap-8">
       {/* Section for all channels, always visible */}
       <section id="all-channels">
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex items-center gap-4 mb-4">
           <h2 className="text-2xl md:text-3xl font-bold text-primary">
-            All Channels
+            All
           </h2>
-          <div className="hidden md:block">
-            <CategoriesDropdown />
-          </div>
+          <CategoriesDropdown />
         </div>
         <ChannelGrid channels={allChannels} />
       </section>
