@@ -34,8 +34,6 @@ const channelData = [
   { id: '1001', name: 'Ananda Barta', category: 'News', imageId: 'tv21' },
   { id: 'b4u_kadak', name: 'B4U Kadak', category: 'Movies', imageId: 'tv32' },
   { id: 'b4u_movies', name: 'B4U Movies', category: 'Movies', imageId: 'tv33' },
-  { id: '9', name: 'DD Kisan', category: 'Infotainment', imageId: 'tv34' },
-  { id: 'zoom', name: 'Zoom', category: 'Music', imageId: 'tv35' },
   { id: 'zillar_barta', name: 'Zillar Barta', category: 'News', imageId: 'tv21' },
 ];
 
@@ -92,10 +90,6 @@ export const channels: Channel[] = channelData.map(channel => {
     streamUrlString = 'https://cdnb4u.wiseplayout.com/B4U_Kadak/HD720/HD720.m3u8';
   } else if (channel.id === 'b4u_movies') {
     streamUrlString = 'https://cdnb4u.wiseplayout.com/B4U_Movies/HD720/HD720.m3u8';
-  } else if (channel.id === '9') {
-    streamUrlString = 'https://cdn-6.pishow.tv/live/9/master.m3u8';
-  } else if (channel.id === 'zoom') {
-    streamUrlString = 'https://dai.google.com/linear/hls/pb/event/JCAm25qkRXiKcK1AJMlvKQ/stream/2c696a7a-bd5f-4975-b4b3-8f75a93e45b9:TPE2/master.m3u8';
   } else if (channel.id === 'zillar_barta') {
     streamUrlString = 'https://server.zillarbarta.com/zillarbarta/tracks-v1a1/mono.ts.m3u8';
   } else {
