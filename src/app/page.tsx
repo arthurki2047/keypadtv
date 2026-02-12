@@ -1,74 +1,65 @@
-import { channels } from '@/lib/channels';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 import { ChannelGrid } from '@/components/channel-grid';
+import { channels, type Channel } from '@/lib/channels';
 
 export default function Home() {
-  const allChannels = channels;
+  // Sort all channels alphabetically for the main grid
+  const allChannels = [...channels].sort((a, b) => a.name.localeCompare(b.name));
 
+  // Group channels by category
   const categories = allChannels.reduce((acc, channel) => {
     if (!acc[channel.category]) {
       acc[channel.category] = [];
     }
     acc[channel.category].push(channel);
     return acc;
-  }, {} as Record<string, typeof allChannels>);
+  }, {} as Record<string, Channel[]>);
 
-  const newsChannels = categories['News'] || [];
-  const musicChannels = categories['Music'] || [];
-  const movieChannels = categories['Movies'] || [];
-  const cartoonChannels = categories['Cartoon'] || [];
-  const otherChannels = Object.entries(categories)
-    .filter(([category]) => !['News', 'Music', 'Movies', 'Cartoon'].includes(category))
-    .flatMap(([, channels]) => channels);
-
+  // Define a preferred order for categories
+  const categoryOrder = ['News', 'Entertainment', 'Music', 'Movies', 'Sports', 'Cartoon'];
+  
+  // Sort categories based on the preferred order, then alphabetically
+  const sortedCategories = Object.entries(categories).sort(([a], [b]) => {
+      const indexA = categoryOrder.indexOf(a);
+      const indexB = categoryOrder.indexOf(b);
+      
+      if (indexA !== -1 && indexB === -1) return -1;
+      if (indexA === -1 && indexB !== -1) return 1;
+      if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+      
+      return a.localeCompare(b);
+  });
 
   return (
     <div className="flex flex-col gap-8">
-      {newsChannels.length > 0 && (
-        <section>
-          <h2 className="container mx-auto px-4 md:px-8 text-2xl md:text-3xl font-bold text-primary mb-4">
-            News
-          </h2>
-          <ChannelGrid channels={newsChannels} />
-        </section>
-      )}
+      {/* Section for all channels, always visible */}
+      <section>
+        <h2 className="text-2xl md:text-3xl font-bold text-primary mb-4">
+          All Channels
+        </h2>
+        <ChannelGrid channels={allChannels} />
+      </section>
 
-      {musicChannels.length > 0 && (
-        <section>
-          <h2 className="container mx-auto px-4 md:px-8 text-2xl md:text-3xl font-bold text-primary mb-4">
-            Music
-          </h2>
-          <ChannelGrid channels={musicChannels} />
-        </section>
-      )}
-
-      {movieChannels.length > 0 && (
-        <section>
-          <h2 className="container mx-auto px-4 md:px-8 text-2xl md:text-3xl font-bold text-primary mb-4">
-            Movies
-          </h2>
-          <ChannelGrid channels={movieChannels} />
-        </section>
-      )}
-
-      {cartoonChannels.length > 0 && (
-        <section>
-          <h2 className="container mx-auto px-4 md:px-8 text-2xl md:text-3xl font-bold text-primary mb-4">
-            Cartoon
-          </h2>
-          <ChannelGrid channels={cartoonChannels} />
-        </section>
-      )}
-
-      {otherChannels.length > 0 && (
-        <section>
-           <h2 className="container mx-auto px-4 md_px-8 text-2xl md:text-3xl font-bold text-primary mb-4">
-            All Channels
-          </h2>
-          <ChannelGrid channels={otherChannels} />
-        </section>
-      )}
+      {/* Collapsible sections for each category */}
+      <Accordion type="multiple" className="w-full">
+        {sortedCategories.map(([category, categoryChannels]) => (
+          categoryChannels.length > 0 && (
+            <AccordionItem value={category} key={category}>
+              <AccordionTrigger className="text-2xl md:text-3xl font-bold text-primary hover:no-underline">
+                {category}
+              </AccordionTrigger>
+              <AccordionContent>
+                <ChannelGrid channels={categoryChannels} />
+              </AccordionContent>
+            </AccordionItem>
+          )
+        ))}
+      </Accordion>
     </div>
   );
 }
-
-    
