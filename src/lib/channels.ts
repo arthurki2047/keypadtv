@@ -111,6 +111,34 @@ export const channels: Channel[] = channelData.map(channel => {
   };
 });
 
+export function getSortedCategories() {
+    // Group channels by category
+  const categories = channels.reduce((acc, channel) => {
+    if (!acc[channel.category]) {
+      acc[channel.category] = [];
+    }
+    acc[channel.category].push(channel);
+    return acc;
+  }, {} as Record<string, Channel[]>);
+
+  // Define a preferred order for categories
+  const categoryOrder = ['News', 'Entertainment', 'Music', 'Movies', 'Sports', 'Cartoon'];
+  
+  // Sort categories based on the preferred order, then alphabetically
+  const sortedCategories = Object.entries(categories).sort(([a], [b]) => {
+      const indexA = categoryOrder.indexOf(a);
+      const indexB = categoryOrder.indexOf(b);
+      
+      if (indexA !== -1 && indexB === -1) return -1;
+      if (indexA === -1 && indexB !== -1) return 1;
+      if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+      
+      return a.localeCompare(b);
+  });
+  
+  return sortedCategories;
+}
+
 // Function to safely escape characters for regex
 function escapeRegExp(string: string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string

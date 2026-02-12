@@ -1,9 +1,18 @@
 "use client";
 
 import { Suspense } from 'react';
-import { Tv } from 'lucide-react';
+import Link from 'next/link';
+import { ChevronDown, Tv } from 'lucide-react';
 import { SearchBar } from './search-bar';
 import { Skeleton } from './ui/skeleton';
+import { Button } from './ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { getSortedCategories } from '@/lib/channels';
 
 function SearchBarFallback() {
     return (
@@ -13,6 +22,30 @@ function SearchBarFallback() {
             </div>
         </div>
     )
+}
+
+function CategoriesDropdown() {
+    const sortedCategories = getSortedCategories();
+
+    return (
+        <div className="hidden md:block">
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="text-primary-foreground hover:bg-primary-foreground/10 focus:ring-accent focus:ring-2">
+                        Categories
+                        <ChevronDown className="ml-2 h-4 w-4" />
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                    {sortedCategories.map(([category]) => (
+                        <DropdownMenuItem key={category} asChild>
+                            <Link href={`/#${category.toLowerCase()}`}>{category}</Link>
+                        </DropdownMenuItem>
+                    ))}
+                </DropdownMenuContent>
+            </DropdownMenu>
+        </div>
+    );
 }
 
 export function Header() {
@@ -25,9 +58,12 @@ export function Header() {
             Keypad TV
           </h1>
         </a>
-        <Suspense fallback={<SearchBarFallback />}>
-          <SearchBar />
-        </Suspense>
+        <div className="flex items-center gap-2">
+            <Suspense fallback={<SearchBarFallback />}>
+              <SearchBar />
+            </Suspense>
+            <CategoriesDropdown />
+        </div>
       </div>
     </header>
   );
