@@ -2,8 +2,6 @@ import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 import { Header } from '@/components/header';
-import { channels } from '@/lib/channels';
-import { ChannelGrid } from '@/components/channel-grid';
 
 export const metadata: Metadata = {
   title: 'Keypad TV',
@@ -24,7 +22,7 @@ export default function RootLayout({
       </head>
       <body className="font-body bg-background text-foreground antialiased">
         <div className="min-h-screen flex flex-col">
-          <Header allChannels={channels} />
+          <Header />
           <main className="flex-grow container mx-auto p-4 md:p-8">
             {children}
           </main>
