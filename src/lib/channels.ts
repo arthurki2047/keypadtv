@@ -27,7 +27,6 @@ const channelData = [
   { id: '9002', name: '9XM', category: 'Music', imageId: 'tv25' },
   { id: '1459', name: 'Goldmines', category: 'Movies', imageId: 'tv26' },
   { id: '1461', name: 'Goldmines Movies', category: 'Movies', imageId: 'tv18' },
-  { id: '559', name: 'Pogo', category: 'Cartoon', imageId: 'tv28' },
   { id: '30', name: 'Rongeen TV', category: 'Entertainment', imageId: 'tv29' },
   { id: '1473', name: 'Khushboo Bangla', category: 'Entertainment', imageId: 'tv30' },
   { id: '237', name: 'CN News', category: 'News', imageId: 'tv21' },
@@ -35,6 +34,8 @@ const channelData = [
   { id: 'b4u_kadak', name: 'B4U Kadak', category: 'Movies', imageId: 'tv32' },
   { id: 'b4u_movies', name: 'B4U Movies', category: 'Movies', imageId: 'tv33' },
   { id: 'zillar_barta', name: 'Zillar Barta', category: 'News', imageId: 'tv21' },
+  { id: 'zb_cartoon', name: 'ZB CARTOON', category: 'Cartoon', imageId: 'tv36' },
+  { id: 'zb_cinema', name: 'ZB CINEMA', category: 'Movies', imageId: 'tv23' },
 ];
 
 export const channels: Channel[] = channelData.map(channel => {
@@ -76,8 +77,6 @@ export const channels: Channel[] = channelData.map(channel => {
     streamUrlString = 'https://cdn-2.pishow.tv/live/1461/master.m3u8';
   } else if (channel.id === '5001') {
     streamUrlString = 'https://n18syndication.akamaized.net/bpk-tv/News18_Bangla_NW18_MOB/output01/master.m3u8';
-  } else if (channel.id === '559') {
-    streamUrlString = 'https://mini.allinonereborn.fun/jiotv-inn/app/ts_live_559.m3u8';
   } else if (channel.id === '30') {
     streamUrlString = 'https://d35j504z0x2vu2.cloudfront.net/v1/manifest/0bc8e8376bd8417a1b6761138aa41c26c7309312/rongeen-tv/63387463-974d-424d-84dd-847307b4de3c/0.m3u8';
   } else if (channel.id === '1473') {
@@ -92,9 +91,13 @@ export const channels: Channel[] = channelData.map(channel => {
     streamUrlString = 'https://cdnb4u.wiseplayout.com/B4U_Movies/HD720/HD720.m3u8';
   } else if (channel.id === 'zillar_barta') {
     streamUrlString = 'https://server.zillarbarta.com/zillarbarta/tracks-v1a1/mono.ts.m3u8';
+  } else if (channel.id === 'zb_cartoon') {
+    streamUrlString = 'https://server.zillarbarta.com/zbcatun/tracks-v1a1/mono.ts.m3u8';
+  } else if (channel.id === 'zb_cinema') {
+    streamUrlString = 'https://server.zillarbarta.com/ZBCINEMA/index.m3u8';
   } else {
     // Default or other channels
-    streamUrlString = `https://mini.allinonereborn.fun/jiotv-inn/app/ts_live_${channel.id}.m3u8`;
+    streamUrlString = `https://mini.allinonereborn.fun/jiotv-inn/app/ts_live_${'channel.id'}.m3u8`;
   }
 
   const logoUrl = imageData?.imageUrl || defaultImageData?.imageUrl || '';
