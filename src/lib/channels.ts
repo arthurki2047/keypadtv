@@ -97,7 +97,7 @@ export const channels: Channel[] = channelData.map(channel => {
     streamUrlString = 'https://server.zillarbarta.com/ZBCINEMA/index.m3u8';
   } else {
     // Default or other channels
-    streamUrlString = `https://mini.allinonereborn.fun/jiotv-inn/app/ts_live_${'channel.id'}.m3u8`;
+    streamUrlString = `https://mini.allinonereborn.fun/jiotv-inn/app/ts_live_${channel.id}.m3u8`;
   }
 
   const logoUrl = imageData?.imageUrl || defaultImageData?.imageUrl || '';
