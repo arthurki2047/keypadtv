@@ -146,6 +146,7 @@ export function useKeypadNavigation({
             const focusableElement = itemContainer.querySelector('a, button, input, [tabindex]:not([tabindex="-1"])') as HTMLElement;
             if(focusableElement) {
                 focusableElement.focus();
+                focusableElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
         }
     }, [focusIndex, gridRef, itemCount, disable]);
