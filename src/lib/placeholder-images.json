@@ -74,8 +74,8 @@
     },
     {
       "id": "tv23",
-      "description": "Star Gold logo",
-      "imageUrl": "https://images.unsplash.com/photo-1574267432553-f3202520410c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtb3ZpZSUyMGxvZ298ZW58MHx8fHwxNzY5MjAyMjMxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "Movie channel logo",
+      "imageUrl": "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxNXx8Q0lORU1BfGVufDB8fHx8MTc3MDg1Njc2MXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "movie logo"
     },
     {
@@ -133,21 +133,9 @@
       "imageHint": "movie theater"
     },
     {
-      "id": "tv34",
-      "description": "DD Kisan logo",
-      "imageUrl": "https://images.unsplash.com/photo-1560493676-04071c5bfd7c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxmYXJtaW5nJTIwdHJhY3RvcnxlbnwwfHx8fDE3OTgyNDM2MTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "farming tractor"
-    },
-    {
-      "id": "tv35",
-      "description": "Zoom channel logo",
-      "imageUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtdXNpYyUyMG1pY3JvcGhvbmV8ZW58MHx8fHwxNzk4MjQzNzU0fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "music microphone"
-    },
-    {
       "id": "tv36",
-      "description": "ZB Cartoon channel logo",
-      "imageUrl": "https://images.unsplash.com/photo-1579541627521-f81846b7a0f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjYXJ0b29uJTIwY2hhcmFjdGVyfGVufDB8fHx8MTc5ODI0Mzg3N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "Cartoon channel logo",
+      "imageUrl": "https://images.unsplash.com/photo-1620568578900-a0cf51e83c38?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxN3x8VE9PTnxlbnwwfHx8fDE3NzA4ODkxNTN8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "cartoon character"
     },
     {
