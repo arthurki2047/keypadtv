@@ -97,13 +97,8 @@ export const channels: Channel[] = channelData.map(channel => {
     streamUrlString = `https://mini.allinonereborn.fun/jiotv-inn/app/ts_live_${channel.id}.m3u8`;
   }
 
-  let logoUrl = imageData?.imageUrl || defaultImageData?.imageUrl || '';
-  let logoHint = imageData?.imageHint || defaultImageData?.imageHint || '';
-
-  if (channel.id === '1473') {
-    logoUrl = `data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGNpcmNsZSBjeD0iMTAwIiBjeT0iMTAwIiByPSI5MCIgZmlsbD0iI2ZmNzA0MyIgc3Ryb2tlPSIjZmY5OTMzIiBzdHJva2Utd2lkdGg9IjEwIiAvPgogIDxwYXRoIGQ9Ik0xMDAsMzUgQzEwMCwzNSAxMTUsNjAgMTM1LDYwIEMxNTUsNjAgMTY1LDQ1IDE2NSwzNSBDMTY1LDI1IDE1NSwxNSAxMzUsMTUgQzExNSwxNSAxMDAsMjUgMTAwLDM1IFoiIGZpbGw9IiNmZmYiIHRyYW5zZm9ybT0icm90YXRlKDAsIDEwMCwgMTAwKSIgLz4KICA8cGF0aCBkPSJNMTAwLDM1IEMxMDAsMzUgMTE1LDYwIDEzNSw2MCBDMTU1LDYwIDE2NSw0NSAxNjUsMzUgQzE2NSwyNSAxNTUsMTUgMTM1LDE1IEMxMTUsMTUgMTAwLDI1IDEwMCwzNSBaIiIgZmlsbD0iI2ZmZiIgdHJhbnNmb3JtPSJyb3RhdGUoNzIsIDEwMCwgMTAwKSIgLz4KICA8cGF0aCBkPSJNOTYsMzVDIEM5NiwzNSAxMTUsNjAgMTM1LDYwIEMxNTUsNjAgMTY1LDQ5IDE2NSwzNSBDMTY1LDI1IDE1NSwxNSAxMzUsMTUgQzExNSwxNSAxMDAsMjUgOTYsMzUgWiIgZmlsbD0iI2ZmZiIgdHJhbnNmb3JtPSJyb3RhdGUoMTQ0LCAxMDAsIDEwMCkiIC8+CiAgPHBhdGggZD0iTTk2LDM1IEM5NiwzNSAxMTUsNjAgMTM1LDYwIEMxNTUsNjAgMTY1LDQ1IDE2NSwzNSBDMTY1LDI1IDE1NSwxNSAxMzUsMTUgQzExNSwxNSAxMDAsMjUgOTYsMzUgWiIgZmlsbD0iI2ZmZiIgdHJhbnNmb3JtPSJyb3RhdGUoMjE2LCAxMDAsIDEwMCkiIC8+CiAgPHBhdGggZD0iTTk2LDM1IEM5NiwzNSAxMTUsNjAgMTM1LDYwIEMxNTUsNjAgMTY1LDQ1IDE2NSwzNSBDMTY1LDI1IDE1NSwxNSAxMzUsMTUgQzExNSwxNSAxMDAsMjUgOTYsMzUgWiIgZmlsbD0iI2ZmZiIgdHJhbnNmb3JtPSJyb3RhdGUoMjg4LCAxMDAsIDEwMCkiIC8+CiAgPGNpcmNsZSBjeD0iMTAwIiBjeT0iMTAwIiByPSIzMCIgZmlsbD0iI2ZmZiIgLz4KPC9zdmc+`;
-    logoHint = 'flower logo';
-  }
+  const logoUrl = imageData?.imageUrl || defaultImageData?.imageUrl || '';
+  const logoHint = imageData?.imageHint || defaultImageData?.imageHint || '';
 
   return {
     ...channel,
@@ -126,3 +121,5 @@ export function filterChannels(channels: Channel[], searchTerm: string): Channel
   const regex = new RegExp(escapedTerm, 'i');
   return channels.filter(channel => regex.test(channel.name));
 }
+
+    
