@@ -23,6 +23,7 @@ export function ChannelCard({ channel, isFocused, onMouseOver }: ChannelCardProp
               sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
               className="object-cover"
               data-ai-hint={channel.logoHint}
+              quality={25}
             />
             <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity">
               <PlayCircle className="h-16 w-16 text-white/80" />
