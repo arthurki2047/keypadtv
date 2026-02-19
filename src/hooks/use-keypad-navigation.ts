@@ -15,7 +15,7 @@ type UseKeypadNavigationProps = {
 
 // Focus constants
 const SEARCH_INPUT_INDEX = -1;
-const SEARCH_BUTTON_INDEX = -2;
+const CATEGORIES_BUTTON_INDEX = -2;
 
 export function useKeypadNavigation({
   gridRef,
@@ -35,26 +35,42 @@ export function useKeypadNavigation({
             lastInteraction.current = 'key';
 
             const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+            const categoriesButton = document.getElementById('categories-button') as HTMLButtonElement | null;
+            const activeElement = document.activeElement;
             
-            if (document.activeElement === searchInput) {
+            // Special handling when an element outside the grid is focused
+            if (activeElement === searchInput) {
                 if (e.key === 'Enter') {
                     e.preventDefault();
                     handleSearchSubmit();
                 } else if (e.key === 'ArrowDown') {
                      e.preventDefault();
                      setFocusIndex(0);
+                } else if (e.key === 'ArrowRight' && categoriesButton) {
+                     e.preventDefault();
+                     setFocusIndex(CATEGORIES_BUTTON_INDEX);
                 } else if (e.key.length === 1 || e.key === 'Backspace' || e.key === 'Delete') {
-                    // Allow typing, backspace, and delete
-                    return;
+                    return; // Allow typing
                 }
+            } else if (activeElement === categoriesButton) {
+                if(e.key === 'ArrowLeft' && searchInput) {
+                    e.preventDefault();
+                    setFocusIndex(SEARCH_INPUT_INDEX);
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    setFocusIndex(0);
+                }
+                // Let dropdown handle its own open/close on Enter/Space
+                return;
             }
             
             if (e.target instanceof HTMLInputElement && e.key !== 'Enter' && !['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
                 return;
             }
             
-            if (e.target instanceof HTMLInputElement && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-                (e.target as HTMLElement).blur();
+            // Blur currently focused element if it's one of our keypad managed elements
+            if ((activeElement === searchInput || activeElement === categoriesButton) && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                (activeElement as HTMLElement).blur();
             }
 
 
@@ -64,15 +80,13 @@ export function useKeypadNavigation({
                     e.preventDefault();
                     if (focusIndex < columns && focusIndex >= 0) { 
                         newIndex = SEARCH_INPUT_INDEX;
-                    } else if (focusIndex === SEARCH_BUTTON_INDEX) {
-                        newIndex = SEARCH_INPUT_INDEX;
-                    } else if (focusIndex >= 0) {
+                    } else if (focusIndex >= columns) {
                         newIndex = focusIndex - columns;
                     }
                     break;
                 case 'ArrowDown':
                     e.preventDefault();
-                    if (focusIndex === SEARCH_INPUT_INDEX) {
+                    if (focusIndex === SEARCH_INPUT_INDEX || focusIndex === CATEGORIES_BUTTON_INDEX) {
                         newIndex = 0;
                     } else {
                         newIndex = focusIndex + columns;
@@ -96,18 +110,19 @@ export function useKeypadNavigation({
                       onEnter(focusIndex);
                     } else if (focusIndex === SEARCH_INPUT_INDEX) {
                         handleSearchSubmit();
+                    } else if (focusIndex === CATEGORIES_BUTTON_INDEX && categoriesButton) {
+                        categoriesButton.click();
                     }
                     return;
                 default:
                     // For any other key, if the search input is not focused, focus it and start typing.
                     if (searchInput && document.activeElement !== searchInput && e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
                         searchInput.focus();
-                        // The browser will handle the typing
                     }
                     return;
             }
 
-            if (newIndex >= -1 && newIndex < itemCount) {
+            if (newIndex >= -2 && newIndex < itemCount) {
                 setFocusIndex(newIndex);
             }
         };
@@ -130,9 +145,15 @@ export function useKeypadNavigation({
         if (disable || lastInteraction.current === 'mouse') return;
 
         const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+        const categoriesButton = document.getElementById('categories-button') as HTMLButtonElement | null;
         
         if (focusIndex === SEARCH_INPUT_INDEX) {
             searchInput?.focus();
+            return;
+        }
+
+        if (focusIndex === CATEGORIES_BUTTON_INDEX) {
+            categoriesButton?.focus();
             return;
         }
         
