@@ -3,7 +3,7 @@
 
 import { useEffect, useRef } from 'react';
 import type { Channel } from '@/lib/channels';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Maximize, Tv } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
@@ -15,6 +15,24 @@ type VideoPlayerProps = {
 export function VideoPlayer({ channel }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { toast } = useToast();
+  const router = useRouter();
+
+  // Handle keypad back button
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Keypads might send 'Backspace' or 'Escape' for a back action.
+      if (event.key === 'Backspace' || event.key === 'Escape') {
+        event.preventDefault();
+        router.back();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [router]);
   
   // Dynamically import hls.js only on the client-side
   useEffect(() => {
@@ -106,11 +124,9 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
   return (
     <div className="flex flex-col h-screen bg-black">
       <header className="flex items-center justify-between p-2 bg-primary text-primary-foreground shadow-lg z-10 shrink-0">
-        <Button asChild variant="ghost" className="text-lg hover:bg-primary-foreground/10 focus:ring-accent focus:ring-2">
-          <Link href="/">
-            <ArrowLeft className="mr-2 h-6 w-6" />
-            Back
-          </Link>
+        <Button variant="ghost" onClick={() => router.back()} className="text-lg hover:bg-primary-foreground/10 focus:ring-accent focus:ring-2">
+          <ArrowLeft className="mr-2 h-6 w-6" />
+          Back
         </Button>
         <div className="flex items-center gap-2 text-center min-w-0">
             <Tv className="h-6 w-6 shrink-0" />
