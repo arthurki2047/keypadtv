@@ -1,11 +1,11 @@
-
 "use client";
 
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { channels } from '@/lib/channels';
 import type { Channel } from '@/lib/channels';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Maximize, Tv } from 'lucide-react';
+import { ArrowLeft, Maximize, Tv, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 type VideoPlayerProps = {
@@ -16,23 +16,83 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { toast } = useToast();
   const router = useRouter();
+  const [isPlaying, setIsPlaying] = useState(true);
 
-  // Handle keypad back button
+  const currentIndex = channels.findIndex(c => c.id === channel.id);
+
+  const handlePrevChannel = () => {
+    const prevIndex = (currentIndex - 1 + channels.length) % channels.length;
+    router.push(`/channel/${channels[prevIndex].id}`);
+  };
+
+  const handleNextChannel = () => {
+    const nextIndex = (currentIndex + 1) % channels.length;
+    router.push(`/channel/${channels[nextIndex].id}`);
+  };
+
+  const handlePlayPause = () => {
+    const video = videoRef.current;
+    if (video) {
+        if (video.paused) {
+            video.play();
+        } else {
+            video.pause();
+        }
+    }
+  };
+
+  // Handle all keypad events and video state listeners in one place
   useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
     const handleKeyDown = (event: KeyboardEvent) => {
-      // Keypads might send 'Backspace' or 'Escape' for a back action.
-      if (event.key === 'Backspace' || event.key === 'Escape') {
-        event.preventDefault();
-        router.back();
+      // Don't interfere if user is typing in an input
+      if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) {
+        return;
+      }
+
+      switch (event.key) {
+        case 'Backspace':
+        case 'Escape':
+          event.preventDefault();
+          router.back();
+          break;
+        
+        case 'ArrowLeft':
+        case '3':
+          event.preventDefault();
+          handlePrevChannel();
+          break;
+
+        case 'ArrowRight':
+        case '6':
+          event.preventDefault();
+          handleNextChannel();
+          break;
+        
+        case '5':
+        case ' ': // Space bar for play/pause
+          event.preventDefault();
+          handlePlayPause();
+          break;
       }
     };
 
+    const onPlay = () => setIsPlaying(true);
+    const onPause = () => setIsPlaying(false);
+
     window.addEventListener('keydown', handleKeyDown);
+    video.addEventListener('play', onPlay);
+    video.addEventListener('pause', onPause);
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
+      video.removeEventListener('play', onPlay);
+      video.removeEventListener('pause', onPause);
     };
-  }, [router]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router, currentIndex]);
   
   // Dynamically import hls.js only on the client-side
   useEffect(() => {
@@ -47,7 +107,6 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
 
       if (Hls.isSupported()) {
         hls = new Hls({
-            // More robust error handling
             maxBufferLength: 30,
             maxMaxBufferLength: 600,
             startLevel: -1, 
@@ -56,7 +115,10 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
         hls.loadSource(streamUrl);
         hls.attachMedia(video);
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
-          video.play().catch(error => console.error("Autoplay was prevented:", error));
+          video.play().catch(error => {
+            console.error("Autoplay was prevented:", error);
+            setIsPlaying(false);
+          });
         });
         hls.on(Hls.Events.ERROR, function (event, data) {
             if (data.fatal) {
@@ -97,7 +159,10 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
       } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.src = streamUrl;
         video.addEventListener('loadedmetadata', () => {
-          video.play().catch(error => console.error("Autoplay was prevented:", error));
+          video.play().catch(error => {
+            console.error("Autoplay was prevented:", error)
+            setIsPlaying(false);
+          });
         });
       }
     }
@@ -138,8 +203,27 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
         </Button>
       </header>
 
-      <main className="flex-1 flex items-center justify-center bg-black p-1 min-h-0">
-          <video ref={videoRef} controls autoPlay playsInline crossOrigin="anonymous" className="w-full h-full max-w-full max-h-full" />
+      <main className="flex-1 flex items-center justify-center bg-black p-1 min-h-0 relative group">
+          <video 
+            ref={videoRef}
+            onClick={handlePlayPause}
+            autoPlay 
+            playsInline 
+            crossOrigin="anonymous" 
+            className="w-full h-full max-w-full max-h-full" 
+          />
+          {/* Custom controls overlay */}
+          <div className="absolute inset-0 flex items-center justify-between px-4 sm:px-8 transition-opacity opacity-0 group-hover:opacity-100 focus-within:opacity-100 bg-black/20">
+            <Button aria-label="Previous Channel" variant="ghost" size="icon" onClick={handlePrevChannel} className="h-16 w-16 text-white rounded-full hover:bg-white/20 focus:bg-white/20 focus:ring-2 focus:ring-accent">
+              <ChevronLeft className="h-12 w-12" />
+            </Button>
+            <Button aria-label={isPlaying ? "Pause" : "Play"} variant="ghost" size="icon" onClick={handlePlayPause} className="h-20 w-20 text-white rounded-full hover:bg-white/20 focus:bg-white/20 focus:ring-2 focus:ring-accent">
+              {isPlaying ? <Pause className="h-16 w-16" /> : <Play className="h-16 w-16" />}
+            </Button>
+            <Button aria-label="Next Channel" variant="ghost" size="icon" onClick={handleNextChannel} className="h-16 w-16 text-white rounded-full hover:bg-white/20 focus:bg-white/20 focus:ring-2 focus:ring-accent">
+              <ChevronRight className="h-12 w-12" />
+            </Button>
+          </div>
       </main>
     </div>
   );
