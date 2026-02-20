@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { channels } from '@/lib/channels';
 import type { Channel } from '@/lib/channels';
 import { useRouter } from 'next/navigation';
@@ -20,17 +20,17 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
 
   const currentIndex = channels.findIndex(c => c.id === channel.id);
 
-  const handlePrevChannel = () => {
+  const handlePrevChannel = useCallback(() => {
     const prevIndex = (currentIndex - 1 + channels.length) % channels.length;
     router.push(`/channel/${channels[prevIndex].id}`);
-  };
+  }, [currentIndex, router]);
 
-  const handleNextChannel = () => {
+  const handleNextChannel = useCallback(() => {
     const nextIndex = (currentIndex + 1) % channels.length;
     router.push(`/channel/${channels[nextIndex].id}`);
-  };
+  }, [currentIndex, router]);
 
-  const handlePlayPause = () => {
+  const handlePlayPause = useCallback(() => {
     const video = videoRef.current;
     if (video) {
         if (video.paused) {
@@ -39,7 +39,7 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
             video.pause();
         }
     }
-  };
+  }, []);
 
   // Handle all keypad events and video state listeners in one place
   useEffect(() => {
@@ -91,8 +91,7 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
       video.removeEventListener('play', onPlay);
       video.removeEventListener('pause', onPause);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router, currentIndex]);
+  }, [router, handlePrevChannel, handleNextChannel, handlePlayPause]);
   
   // Dynamically import hls.js only on the client-side
   useEffect(() => {
