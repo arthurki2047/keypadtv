@@ -67,7 +67,7 @@ export function ChannelGrid({ sections: propsSections, channels: propsChannels, 
 
   if (flattenedChannels.length === 0) {
     return isSearchResults ? (
-      <div className="flex flex-col items-center justify-center h-[50vh] text-center">
+      <div className="flex flex-col items-center justify-center h-[50vh] text-center p-8 bg-white/50 rounded-3xl border-2 border-dashed border-muted">
         <p className="text-2xl font-semibold text-muted-foreground">No channels found.</p>
         <p className="text-lg text-muted-foreground">Try a different search term.</p>
       </div>
@@ -77,16 +77,19 @@ export function ChannelGrid({ sections: propsSections, channels: propsChannels, 
   let globalCounter = 0;
 
   return (
-    <div ref={gridRef} className="flex flex-col gap-8">
+    <div ref={gridRef} className="flex flex-col gap-10">
       {sections.map((section) => (
         <section key={section.title || 'default'} className="scroll-mt-24">
-          <div className="flex items-center gap-4 mb-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-primary">
-              {section.title}
-            </h2>
+          <div className="flex items-center justify-between gap-4 mb-6 pb-2 border-b-2 border-primary/10">
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-8 bg-accent rounded-full"></div>
+              <h2 className="text-2xl md:text-3xl font-black text-primary uppercase tracking-tight">
+                {section.title}
+              </h2>
+            </div>
             {section.title === 'All' && <CategoriesDropdown />}
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-8">
             {section.channels.map((channel) => {
               const currentIndex = globalCounter++;
               return (
