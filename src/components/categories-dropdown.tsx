@@ -10,12 +10,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { getSortedCategories } from '@/lib/channels';
-import { useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 
 export function CategoriesDropdown() {
     const sortedCategories = getSortedCategories();
-    const searchParams = useSearchParams();
-    const activeCat = searchParams.get('cat');
+    const params = useParams();
+    const activeCat = params.id as string | undefined;
 
     return (
         <DropdownMenu>
@@ -36,7 +36,7 @@ export function CategoriesDropdown() {
                 </DropdownMenuItem>
                 {sortedCategories.map(([category]) => (
                     <DropdownMenuItem key={category} asChild>
-                        <Link href={`/?cat=${category.toLowerCase()}`}>{category}</Link>
+                        <Link href={`/category/${category.toLowerCase()}`}>{category}</Link>
                     </DropdownMenuItem>
                 ))}
             </DropdownMenuContent>
