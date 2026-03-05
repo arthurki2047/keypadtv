@@ -1,21 +1,38 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { Channel } from '@/lib/channels';
 import { useKeypadNavigation } from '@/hooks/use-keypad-navigation';
 import { ChannelCard } from './channel-card';
+import { CategoriesDropdown } from './categories-dropdown';
+
+export type ChannelSection = {
+  title: string;
+  channels: Channel[];
+};
 
 type ChannelGridProps = {
-  channels: Channel[];
+  sections?: ChannelSection[];
+  channels?: Channel[]; // Legacy support or single list
   isSearchResults?: boolean;
 };
 
-export function ChannelGrid({ channels, isSearchResults = false }: ChannelGridProps) {
+export function ChannelGrid({ sections: propsSections, channels: propsChannels, isSearchResults = false }: ChannelGridProps) {
   const [focusIndex, setFocusIndex] = useState(isSearchResults ? 0 : -1);
   const router = useRouter();
   const gridRef = useRef<HTMLDivElement>(null);
   const [columns, setColumns] = useState(4);
+
+  // Normalize data into sections for unified handling
+  const sections = useMemo(() => {
+    if (propsSections) return propsSections;
+    if (propsChannels) return [{ title: '', channels: propsChannels }];
+    return [];
+  }, [propsSections, propsChannels]);
+
+  // Flatten channels for keypad navigation logic
+  const flattenedChannels = useMemo(() => sections.flatMap(s => s.channels), [sections]);
 
   useEffect(() => {
     const updateColumns = () => {
@@ -32,45 +49,59 @@ export function ChannelGrid({ channels, isSearchResults = false }: ChannelGridPr
   }, []);
 
   const onEnter = (index: number) => {
-    if (index >= 0 && index < channels.length) {
-      const channelId = channels[index].id;
+    if (index >= 0 && index < flattenedChannels.length) {
+      const channelId = flattenedChannels[index].id;
       router.push(`/channel/${channelId}`);
     }
   };
 
   const { handleMouseOver } = useKeypadNavigation({
     gridRef,
-    itemCount: channels.length,
+    itemCount: flattenedChannels.length,
     columns: columns,
     onEnter,
     focusIndex,
     setFocusIndex,
-    disable: false // Always enable keypad nav
+    disable: false
   });
 
+  if (flattenedChannels.length === 0) {
+    return isSearchResults ? (
+      <div className="flex flex-col items-center justify-center h-[50vh] text-center">
+        <p className="text-2xl font-semibold text-muted-foreground">No channels found.</p>
+        <p className="text-lg text-muted-foreground">Try a different search term.</p>
+      </div>
+    ) : null;
+  }
+
+  let globalCounter = 0;
+
   return (
-    <>
-      {channels.length > 0 ? (
-        <div
-          ref={gridRef}
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6"
-          role="grid"
-        >
-          {channels.map((channel, index) => (
-            <ChannelCard
-              key={channel.id}
-              channel={channel}
-              isFocused={index === focusIndex}
-              onMouseOver={() => handleMouseOver(index)}
-            />
-          ))}
-        </div>
-      ) : (
-        isSearchResults && <div className="flex flex-col items-center justify-center h-[50vh] text-center">
-          <p className="text-2xl font-semibold text-muted-foreground">No channels found.</p>
-          <p className="text-lg text-muted-foreground">Try a different search term.</p>
-        </div>
-      )}
-    </>
+    <div ref={gridRef} className="flex flex-col gap-8">
+      {sections.map((section) => (
+        <section key={section.title || 'default'} className="scroll-mt-24">
+          <div className="flex items-center gap-4 mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-primary">
+              {section.title}
+            </h2>
+            {section.title === 'All' && <CategoriesDropdown />}
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+            {section.channels.map((channel) => {
+              const currentIndex = globalCounter++;
+              return (
+                <div key={`${section.title}-${channel.id}`} data-focus-index={currentIndex}>
+                  <ChannelCard
+                    channel={channel}
+                    isFocused={currentIndex === focusIndex}
+                    onMouseOver={() => handleMouseOver(currentIndex)}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      ))}
+    </div>
   );
 }

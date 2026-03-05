@@ -13,7 +13,6 @@ type UseKeypadNavigationProps = {
   disable?: boolean;
 };
 
-// Focus constants
 const SEARCH_INPUT_INDEX = -1;
 const CATEGORIES_BUTTON_INDEX = -2;
 
@@ -38,7 +37,6 @@ export function useKeypadNavigation({
             const categoriesButton = document.getElementById('categories-button') as HTMLButtonElement | null;
             const activeElement = document.activeElement;
             
-            // Special handling when an element outside the grid is focused
             if (activeElement === searchInput) {
                 if (e.key === 'Enter') {
                     e.preventDefault();
@@ -50,7 +48,7 @@ export function useKeypadNavigation({
                      e.preventDefault();
                      setFocusIndex(CATEGORIES_BUTTON_INDEX);
                 } else if (e.key.length === 1 || e.key === 'Backspace' || e.key === 'Delete') {
-                    return; // Allow typing
+                    return;
                 }
             } else if (activeElement === categoriesButton) {
                 if(e.key === 'ArrowLeft' && searchInput) {
@@ -60,7 +58,6 @@ export function useKeypadNavigation({
                     e.preventDefault();
                     setFocusIndex(0);
                 }
-                // Let dropdown handle its own open/close on Enter/Space
                 return;
             }
             
@@ -68,11 +65,9 @@ export function useKeypadNavigation({
                 return;
             }
             
-            // Blur currently focused element if it's one of our keypad managed elements
             if ((activeElement === searchInput || activeElement === categoriesButton) && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
                 (activeElement as HTMLElement).blur();
             }
-
 
             let newIndex = focusIndex;
             switch (e.key) {
@@ -88,7 +83,7 @@ export function useKeypadNavigation({
                     e.preventDefault();
                     if (focusIndex === SEARCH_INPUT_INDEX || focusIndex === CATEGORIES_BUTTON_INDEX) {
                         newIndex = 0;
-                    } else {
+                    } else if (focusIndex + columns < itemCount) {
                         newIndex = focusIndex + columns;
                     }
                     break;
@@ -115,7 +110,6 @@ export function useKeypadNavigation({
                     }
                     return;
                 default:
-                    // For any other key, if the search input is not focused, focus it and start typing.
                     if (searchInput && document.activeElement !== searchInput && e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
                         searchInput.focus();
                     }
@@ -162,7 +156,8 @@ export function useKeypadNavigation({
         const grid = gridRef.current;
         if (!grid) return;
         
-        const itemContainer = grid.children[focusIndex] as HTMLElement;
+        // Use data-focus-index to find the element across nested sections
+        const itemContainer = grid.querySelector(`[data-focus-index="${focusIndex}"]`) as HTMLElement;
         if (itemContainer) {
             const focusableElement = itemContainer.querySelector('a, button, input, [tabindex]:not([tabindex="-1"])') as HTMLElement;
             if(focusableElement) {

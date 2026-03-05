@@ -1,36 +1,38 @@
-import { ChannelGrid } from '@/components/channel-grid';
+import { ChannelGrid, type ChannelSection } from '@/components/channel-grid';
 import { channels, getSortedCategories } from '@/lib/channels';
-import { CategoriesDropdown } from '@/components/categories-dropdown';
 
-export default function Home() {
-  // Sort all channels alphabetically for the main grid
+type Props = {
+  searchParams: Promise<{ cat?: string }>;
+};
+
+export default async function Home({ searchParams }: Props) {
+  const params = await searchParams;
+  const selectedCatSlug = typeof params.cat === 'string' ? params.cat.toLowerCase() : undefined;
+  
   const allChannels = [...channels].sort((a, b) => a.name.localeCompare(b.name));
   const sortedCategories = getSortedCategories();
 
+  const sections: ChannelSection[] = [
+    {
+      title: 'All',
+      channels: allChannels,
+    },
+  ];
+
+  // If a category is selected via URL, show it below "All"
+  if (selectedCatSlug) {
+    const categoryEntry = sortedCategories.find(([name]) => name.toLowerCase() === selectedCatSlug);
+    if (categoryEntry) {
+      sections.push({
+        title: categoryEntry[0],
+        channels: categoryEntry[1].sort((a, b) => a.name.localeCompare(b.name)),
+      });
+    }
+  }
+
   return (
     <div className="flex flex-col gap-8">
-      {/* Section for all channels, always visible */}
-      <section id="all-channels">
-        <div className="flex items-center gap-4 mb-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-primary">
-            All
-          </h2>
-          <CategoriesDropdown />
-        </div>
-        <ChannelGrid channels={allChannels} />
-      </section>
-
-      {/* Sections for each category */}
-      {sortedCategories.map(([category, categoryChannels]) => (
-        categoryChannels.length > 0 && (
-          <section id={category.toLowerCase()} key={category} className="scroll-mt-24">
-             <h2 className="text-2xl md:text-3xl font-bold text-primary mb-4">
-                {category}
-              </h2>
-            <ChannelGrid channels={categoryChannels.sort((a, b) => a.name.localeCompare(b.name))} />
-          </section>
-        )
-      ))}
+      <ChannelGrid sections={sections} />
     </div>
   );
 }

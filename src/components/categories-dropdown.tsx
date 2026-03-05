@@ -10,9 +10,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { getSortedCategories } from '@/lib/channels';
+import { useSearchParams } from 'next/navigation';
 
 export function CategoriesDropdown() {
     const sortedCategories = getSortedCategories();
+    const searchParams = useSearchParams();
+    const activeCat = searchParams.get('cat');
 
     return (
         <DropdownMenu>
@@ -23,14 +26,17 @@ export function CategoriesDropdown() {
                     size="sm" 
                     className="focus:ring-accent focus:ring-2 rounded-full px-3 text-sm h-9"
                 >
-                    Categories
+                    {activeCat ? activeCat.charAt(0).toUpperCase() + activeCat.slice(1) : 'Categories'}
                     <ChevronDown className="ml-1.5 h-4 w-4 opacity-70" />
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
+                <DropdownMenuItem asChild>
+                    <Link href="/">Reset All</Link>
+                </DropdownMenuItem>
                 {sortedCategories.map(([category]) => (
                     <DropdownMenuItem key={category} asChild>
-                        <Link href={`/#${category.toLowerCase()}`}>{category}</Link>
+                        <Link href={`/?cat=${category.toLowerCase()}`}>{category}</Link>
                     </DropdownMenuItem>
                 ))}
             </DropdownMenuContent>

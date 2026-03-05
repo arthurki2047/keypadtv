@@ -1,4 +1,3 @@
-
 import { PlaceHolderImages } from './placeholder-images';
 
 export interface Channel {
@@ -42,7 +41,6 @@ export const channels: Channel[] = channelData.map(channel => {
   const imageData = PlaceHolderImages.find(img => img.id === channel.imageId);
   const defaultImageData = PlaceHolderImages.find(img => img.id === 'tv_default');
   
-  // Base URLs and specific stream logic
   let streamUrlString = '';
 
   if (channel.id === '3') {
@@ -96,7 +94,6 @@ export const channels: Channel[] = channelData.map(channel => {
   } else if (channel.id === 'zb_cinema') {
     streamUrlString = 'https://server.zillarbarta.com/ZBCINEMA/index.m3u8';
   } else {
-    // Default or other channels
     streamUrlString = `https://mini.allinonereborn.fun/jiotv-inn/app/ts_live_${channel.id}.m3u8`;
   }
 
@@ -112,7 +109,6 @@ export const channels: Channel[] = channelData.map(channel => {
 });
 
 export function getSortedCategories() {
-    // Group channels by category
   const categories = channels.reduce((acc, channel) => {
     if (!acc[channel.category]) {
       acc[channel.category] = [];
@@ -121,10 +117,8 @@ export function getSortedCategories() {
     return acc;
   }, {} as Record<string, Channel[]>);
 
-  // Define a preferred order for categories
   const categoryOrder = ['News', 'Entertainment', 'Music', 'Movies', 'Sports', 'Cartoon'];
   
-  // Sort categories based on the preferred order, then alphabetically
   const sortedCategories = Object.entries(categories).sort(([a], [b]) => {
       const indexA = categoryOrder.indexOf(a);
       const indexB = categoryOrder.indexOf(b);
@@ -139,9 +133,8 @@ export function getSortedCategories() {
   return sortedCategories;
 }
 
-// Function to safely escape characters for regex
 function escapeRegExp(string: string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 export function filterChannels(channels: Channel[], searchTerm: string): Channel[] {
@@ -152,5 +145,3 @@ export function filterChannels(channels: Channel[], searchTerm: string): Channel
   const regex = new RegExp(escapedTerm, 'i');
   return channels.filter(channel => regex.test(channel.name));
 }
-
-    
