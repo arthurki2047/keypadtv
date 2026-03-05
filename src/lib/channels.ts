@@ -35,6 +35,8 @@ const channelData = [
   { id: 'zillar_barta', name: 'Zillar Barta', category: 'News', imageId: 'tv21' },
   { id: 'zb_cartoon', name: 'ZB CARTOON', category: 'Cartoon', imageId: 'tv36' },
   { id: 'zb_cinema', name: 'ZB CINEMA', category: 'Movies', imageId: 'tv23' },
+  { id: 'zoom', name: 'ZOOM', category: 'Music', imageId: 'tv12' },
+  { id: 'music_india', name: 'MUSIC INDIA', category: 'Music', imageId: 'tv12' },
 ];
 
 export const channels: Channel[] = channelData.map(channel => {
@@ -93,6 +95,10 @@ export const channels: Channel[] = channelData.map(channel => {
     streamUrlString = 'https://server.zillarbarta.com/zbcatun/tracks-v1a1/mono.ts.m3u8';
   } else if (channel.id === 'zb_cinema') {
     streamUrlString = 'https://server.zillarbarta.com/ZBCINEMA/index.m3u8';
+  } else if (channel.id === 'zoom') {
+    streamUrlString = 'https://dai.google.com/linear/hls/event/JCAm25qkRXiKcK1AJMlvKQ/master.m3u8';
+  } else if (channel.id === 'music_india') {
+    streamUrlString = 'https://cdn-2.pishow.tv/live/226/master.m3u8';
   } else {
     streamUrlString = `https://mini.allinonereborn.fun/jiotv-inn/app/ts_live_${channel.id}.m3u8`;
   }
