@@ -31,6 +31,10 @@
   * {
     @apply border-border;
   }
+  html {
+    /* Accounts for the sticky header (80px) plus some breathing room */
+    scroll-padding-top: 100px;
+  }
   body {
     @apply bg-background text-foreground antialiased;
     background-image: radial-gradient(circle at 2px 2px, hsl(var(--primary) / 0.05) 1px, transparent 0);

@@ -87,8 +87,8 @@ export function useKeypadNavigation({
                         e.preventDefault();
                         onEnter(focusIndex);
                     } else if (focusIndex === CATEGORIES_BUTTON_INDEX) {
-                        // Explicitly click the button for keypad phones
-                        e.preventDefault();
+                        // Dropdown handles its own keyboard enter if focused, 
+                        // but we can trigger it for reliability
                         categoriesButton?.click();
                     }
                     break;
@@ -119,28 +119,31 @@ export function useKeypadNavigation({
         const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
         const categoriesButton = document.getElementById('categories-button') as HTMLButtonElement | null;
         
+        let elementToFocus: HTMLElement | null = null;
+
         if (focusIndex === SEARCH_INPUT_INDEX) {
-            searchInput?.focus();
-            return;
-        }
-
-        if (focusIndex === CATEGORIES_BUTTON_INDEX) {
-            categoriesButton?.focus();
-            return;
-        }
-        
-        if (focusIndex < 0) return;
-
-        const grid = gridRef.current;
-        if (!grid) return;
-        
-        const itemContainer = grid.querySelector(`[data-focus-index="${focusIndex}"]`) as HTMLElement;
-        if (itemContainer) {
-            const focusableElement = itemContainer.querySelector('a, button, input, [tabindex]:not([tabindex="-1"])') as HTMLElement;
-            if(focusableElement) {
-                focusableElement.focus();
-                focusableElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            elementToFocus = searchInput;
+        } else if (focusIndex === CATEGORIES_BUTTON_INDEX) {
+            elementToFocus = categoriesButton;
+        } else if (focusIndex >= 0) {
+            const grid = gridRef.current;
+            if (grid) {
+                const itemContainer = grid.querySelector(`[data-focus-index="${focusIndex}"]`) as HTMLElement;
+                if (itemContainer) {
+                    elementToFocus = itemContainer.querySelector('a, button, input, [tabindex]:not([tabindex="-1"])') as HTMLElement;
+                }
             }
+        }
+
+        if (elementToFocus) {
+            elementToFocus.focus();
+            // Use 'auto' behavior for snappier response on low-end keypad devices
+            // 'center' ensures the item is clearly visible and not cut off by headers
+            elementToFocus.scrollIntoView({ 
+                behavior: 'auto', 
+                block: 'center', 
+                inline: 'nearest' 
+            });
         }
     }, [focusIndex, gridRef, itemCount, disable]);
 
