@@ -33,107 +33,114 @@ export function useKeypadNavigation({
         const handleKeyDown = (e: KeyboardEvent) => {
             lastInteraction.current = 'key';
 
+            // Don't interfere if user is in a menu, dialog, or selecting from a dropdown
+            const activeElement = document.activeElement;
+            if (activeElement?.closest('[role="menu"], [role="listbox"], [role="dialog"], [data-radix-popper-content-wrapper]')) {
+                return;
+            }
+
             const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
             const categoriesButton = document.getElementById('categories-button') as HTMLButtonElement | null;
-            const activeElement = document.activeElement;
             
+            // Special handling for the search input
             if (activeElement === searchInput) {
                 if (e.key === 'Enter') {
-                    e.preventDefault();
-                    handleSearchSubmit();
-                } else if (e.key === 'ArrowDown') {
-                     e.preventDefault();
-                     setFocusIndex(0);
-                } else if (e.key === 'ArrowRight' && categoriesButton) {
-                     e.preventDefault();
-                     setFocusIndex(CATEGORIES_BUTTON_INDEX);
-                } else if (e.key.length === 1 || e.key === 'Backspace' || e.key === 'Delete') {
-                    return;
-                }
-            } else if (activeElement === categoriesButton) {
-                if(e.key === 'ArrowLeft' && searchInput) {
-                    e.preventDefault();
-                    setFocusIndex(SEARCH_INPUT_INDEX);
+                    return; // Let native submit handle it
                 } else if (e.key === 'ArrowDown') {
                     e.preventDefault();
                     setFocusIndex(0);
+                    return;
+                } else if (e.key === 'ArrowRight' && categoriesButton) {
+                    e.preventDefault();
+                    setFocusIndex(CATEGORIES_BUTTON_INDEX);
+                    return;
+                } else if (e.key === 'Tab') {
+                    return;
                 }
-                return;
-            }
+            } 
             
-            if (e.target instanceof HTMLInputElement && e.key !== 'Enter' && !['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-                return;
-            }
-            
-            if ((activeElement === searchInput || activeElement === categoriesButton) && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-                (activeElement as HTMLElement).blur();
+            // Special handling for the categories button
+            else if (activeElement === categoriesButton) {
+                if (e.key === 'ArrowLeft' && searchInput) {
+                    e.preventDefault();
+                    setFocusIndex(SEARCH_INPUT_INDEX);
+                    return;
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    setFocusIndex(0);
+                    return;
+                } else if (e.key === 'Enter' || e.key === ' ') {
+                    // Let the button handle Enter/Space to open the dropdown naturally
+                    return;
+                }
             }
 
+            // Navigation keys logic
             let newIndex = focusIndex;
             switch (e.key) {
                 case 'ArrowUp':
-                    e.preventDefault();
                     if (focusIndex < columns && focusIndex >= 0) { 
-                        newIndex = SEARCH_INPUT_INDEX;
+                        e.preventDefault();
+                        // From the first row, go up to Categories button if it exists
+                        newIndex = categoriesButton ? CATEGORIES_BUTTON_INDEX : SEARCH_INPUT_INDEX;
                     } else if (focusIndex >= columns) {
+                        e.preventDefault();
                         newIndex = focusIndex - columns;
                     }
                     break;
                 case 'ArrowDown':
-                    e.preventDefault();
                     if (focusIndex === SEARCH_INPUT_INDEX || focusIndex === CATEGORIES_BUTTON_INDEX) {
+                        e.preventDefault();
                         newIndex = 0;
                     } else if (focusIndex + columns < itemCount) {
+                        e.preventDefault();
                         newIndex = focusIndex + columns;
                     }
                     break;
                 case 'ArrowLeft':
-                    e.preventDefault();
                     if (focusIndex >= 0 && focusIndex % columns !== 0) {
+                        e.preventDefault();
                         newIndex = focusIndex - 1;
+                    } else if (focusIndex === CATEGORIES_BUTTON_INDEX) {
+                        e.preventDefault();
+                        newIndex = SEARCH_INPUT_INDEX;
                     }
                     break;
                 case 'ArrowRight':
-                    e.preventDefault();
                     if (focusIndex >= 0 && (focusIndex + 1) % columns !== 0 && focusIndex + 1 < itemCount) {
+                        e.preventDefault();
                         newIndex = focusIndex + 1;
+                    } else if (focusIndex === SEARCH_INPUT_INDEX && categoriesButton) {
+                        e.preventDefault();
+                        newIndex = CATEGORIES_BUTTON_INDEX;
                     }
                     break;
                 case 'Enter':
-                    e.preventDefault();
                     if (focusIndex >= 0) {
-                      onEnter(focusIndex);
-                    } else if (focusIndex === SEARCH_INPUT_INDEX) {
-                        handleSearchSubmit();
-                    } else if (focusIndex === CATEGORIES_BUTTON_INDEX && categoriesButton) {
-                        categoriesButton.click();
+                        e.preventDefault();
+                        onEnter(focusIndex);
                     }
-                    return;
+                    // For -1 and -2, we let the native element handle Enter
+                    break;
                 default:
-                    if (searchInput && document.activeElement !== searchInput && e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
+                    // Autofocus search on typing if not focused on another interactive element
+                    if (searchInput && document.activeElement !== searchInput && 
+                        e.key.length === 1 && !e.ctrlKey && !e.metaKey && 
+                        !(activeElement instanceof HTMLButtonElement) &&
+                        !(activeElement instanceof HTMLAnchorElement)) {
                         searchInput.focus();
                     }
                     return;
             }
 
-            if (newIndex >= -2 && newIndex < itemCount) {
+            if (newIndex !== focusIndex && newIndex >= -2 && newIndex < itemCount) {
                 setFocusIndex(newIndex);
             }
         };
 
-        const handleSearchSubmit = () => {
-            const searchButton = document.getElementById('search-button') as HTMLButtonElement | null;
-            if (searchButton) {
-                searchButton.form?.requestSubmit();
-            }
-        };
-
         window.addEventListener('keydown', handleKeyDown);
-
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
-    }, [focusIndex, setFocusIndex, itemCount, columns, onEnter, gridRef, loop, disable]);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [focusIndex, setFocusIndex, itemCount, columns, onEnter, disable]);
 
     useEffect(() => {
         if (disable || lastInteraction.current === 'mouse') return;
@@ -156,7 +163,6 @@ export function useKeypadNavigation({
         const grid = gridRef.current;
         if (!grid) return;
         
-        // Use data-focus-index to find the element across nested sections
         const itemContainer = grid.querySelector(`[data-focus-index="${focusIndex}"]`) as HTMLElement;
         if (itemContainer) {
             const focusableElement = itemContainer.querySelector('a, button, input, [tabindex]:not([tabindex="-1"])') as HTMLElement;
