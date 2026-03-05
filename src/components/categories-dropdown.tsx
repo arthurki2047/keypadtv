@@ -17,9 +17,14 @@ export function CategoriesDropdown() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button id="categories-button" variant="outline" className="focus:ring-accent focus:ring-2 rounded-full px-4 text-base">
+                <Button 
+                    id="categories-button" 
+                    variant="outline" 
+                    size="sm" 
+                    className="focus:ring-accent focus:ring-2 rounded-full px-3 text-sm h-9"
+                >
                     Categories
-                    <ChevronDown className="ml-2 h-4 w-4" />
+                    <ChevronDown className="ml-1.5 h-4 w-4 opacity-70" />
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
