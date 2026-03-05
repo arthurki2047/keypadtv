@@ -42,39 +42,6 @@ export function useKeypadNavigation({
             const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
             const categoriesButton = document.getElementById('categories-button') as HTMLButtonElement | null;
             
-            // Special handling for the search input
-            if (activeElement === searchInput) {
-                if (e.key === 'Enter') {
-                    return; // Let native submit handle it
-                } else if (e.key === 'ArrowDown') {
-                    e.preventDefault();
-                    setFocusIndex(0);
-                    return;
-                } else if (e.key === 'ArrowRight' && categoriesButton) {
-                    e.preventDefault();
-                    setFocusIndex(CATEGORIES_BUTTON_INDEX);
-                    return;
-                } else if (e.key === 'Tab') {
-                    return;
-                }
-            } 
-            
-            // Special handling for the categories button
-            else if (activeElement === categoriesButton) {
-                if (e.key === 'ArrowLeft' && searchInput) {
-                    e.preventDefault();
-                    setFocusIndex(SEARCH_INPUT_INDEX);
-                    return;
-                } else if (e.key === 'ArrowDown') {
-                    e.preventDefault();
-                    setFocusIndex(0);
-                    return;
-                } else if (e.key === 'Enter' || e.key === ' ') {
-                    // Let the button handle Enter/Space to open the dropdown naturally
-                    return;
-                }
-            }
-
             // Navigation keys logic
             let newIndex = focusIndex;
             switch (e.key) {
@@ -119,8 +86,11 @@ export function useKeypadNavigation({
                     if (focusIndex >= 0) {
                         e.preventDefault();
                         onEnter(focusIndex);
+                    } else if (focusIndex === CATEGORIES_BUTTON_INDEX) {
+                        // Explicitly click the button for keypad phones
+                        e.preventDefault();
+                        categoriesButton?.click();
                     }
-                    // For -1 and -2, we let the native element handle Enter
                     break;
                 default:
                     // Autofocus search on typing if not focused on another interactive element
@@ -129,6 +99,7 @@ export function useKeypadNavigation({
                         !(activeElement instanceof HTMLButtonElement) &&
                         !(activeElement instanceof HTMLAnchorElement)) {
                         searchInput.focus();
+                        setFocusIndex(SEARCH_INPUT_INDEX);
                     }
                     return;
             }
