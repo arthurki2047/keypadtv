@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from 'react';
@@ -41,6 +42,12 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
     }
   }, []);
 
+  const handleGoBack = useCallback(() => {
+    // router.push('/') is more reliable than router.back() on many keypad devices 
+    // where history might be empty or unpredictable
+    router.push('/');
+  }, [router]);
+
   // Handle all keypad events and video state listeners in one place
   useEffect(() => {
     const video = videoRef.current;
@@ -52,13 +59,16 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
         return;
       }
 
+      // Handle Back keys (Escape, Backspace, and common keypad 'Back' keys)
+      const isBackKey = ['Backspace', 'Escape', 'BrowserBack', 'Clear', 'SoftLeft', 'EndCall'].includes(event.key);
+
+      if (isBackKey) {
+        event.preventDefault();
+        handleGoBack();
+        return;
+      }
+
       switch (event.key) {
-        case 'Backspace':
-        case 'Escape':
-          event.preventDefault();
-          router.back();
-          break;
-        
         case 'ArrowLeft':
         case '3':
           event.preventDefault();
@@ -72,6 +82,7 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
           break;
         
         case '5':
+        case 'Enter': // Some keypads use Enter as the main action button
         case ' ': // Space bar for play/pause
           event.preventDefault();
           handlePlayPause();
@@ -82,16 +93,16 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
     const onPlay = () => setIsPlaying(true);
     const onPause = () => setIsPlaying(false);
 
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown, true); // Use capture to handle events before they propagate
     video.addEventListener('play', onPlay);
     video.addEventListener('pause', onPause);
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keydown', handleKeyDown, true);
       video.removeEventListener('play', onPlay);
       video.removeEventListener('pause', onPause);
     };
-  }, [router, handlePrevChannel, handleNextChannel, handlePlayPause]);
+  }, [handleGoBack, handlePrevChannel, handleNextChannel, handlePlayPause]);
   
   // Dynamically import hls.js only on the client-side
   useEffect(() => {
@@ -151,8 +162,6 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
                   hls.destroy();
                   break;
               }
-            } else {
-                console.warn('Non-fatal HLS.js error:', data);
             }
         });
       } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
@@ -188,7 +197,7 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
   return (
     <div className="flex flex-col h-screen bg-black">
       <header className="flex items-center justify-between p-2 bg-primary text-primary-foreground shadow-lg z-10 shrink-0">
-        <Button variant="ghost" onClick={() => router.back()} className="text-lg hover:bg-primary-foreground/10 focus:ring-accent focus:ring-2">
+        <Button variant="ghost" onClick={handleGoBack} className="text-lg hover:bg-primary-foreground/10 focus:ring-accent focus:ring-2">
           <ArrowLeft className="mr-2 h-6 w-6" />
           Back
         </Button>
@@ -209,19 +218,21 @@ export function VideoPlayer({ channel }: VideoPlayerProps) {
             autoPlay 
             playsInline 
             crossOrigin="anonymous" 
-            className="w-full h-full max-w-full max-h-full" 
+            className="w-full h-full max-w-full max-h-full cursor-pointer" 
           />
           {/* Custom controls overlay */}
-          <div className="absolute inset-0 flex items-center justify-between px-4 sm:px-8 transition-opacity opacity-0 group-hover:opacity-100 focus-within:opacity-100 bg-black/20">
-            <Button aria-label="Previous Channel" variant="ghost" size="icon" onClick={handlePrevChannel} className="h-16 w-16 text-white rounded-full hover:bg-white/20 focus:bg-white/20 focus:ring-2 focus:ring-accent">
-              <ChevronLeft className="h-12 w-12" />
-            </Button>
-            <Button aria-label={isPlaying ? "Pause" : "Play"} variant="ghost" size="icon" onClick={handlePlayPause} className="h-20 w-20 text-white rounded-full hover:bg-white/20 focus:bg-white/20 focus:ring-2 focus:ring-accent">
-              {isPlaying ? <Pause className="h-16 w-16" /> : <Play className="h-16 w-16" />}
-            </Button>
-            <Button aria-label="Next Channel" variant="ghost" size="icon" onClick={handleNextChannel} className="h-16 w-16 text-white rounded-full hover:bg-white/20 focus:bg-white/20 focus:ring-2 focus:ring-accent">
-              <ChevronRight className="h-12 w-12" />
-            </Button>
+          <div className="absolute inset-0 flex items-center justify-between px-4 sm:px-8 transition-opacity opacity-0 group-hover:opacity-100 focus-within:opacity-100 bg-black/20 pointer-events-none">
+            <div className="flex w-full items-center justify-between pointer-events-auto">
+              <Button aria-label="Previous Channel" variant="ghost" size="icon" onClick={handlePrevChannel} className="h-16 w-16 text-white rounded-full hover:bg-white/20 focus:bg-white/20 focus:ring-2 focus:ring-accent">
+                <ChevronLeft className="h-12 w-12" />
+              </Button>
+              <Button aria-label={isPlaying ? "Pause" : "Play"} variant="ghost" size="icon" onClick={handlePlayPause} className="h-20 w-20 text-white rounded-full hover:bg-white/20 focus:bg-white/20 focus:ring-2 focus:ring-accent">
+                {isPlaying ? <Pause className="h-16 w-16" /> : <Play className="h-16 w-16" />}
+              </Button>
+              <Button aria-label="Next Channel" variant="ghost" size="icon" onClick={handleNextChannel} className="h-16 w-16 text-white rounded-full hover:bg-white/20 focus:bg-white/20 focus:ring-2 focus:ring-accent">
+                <ChevronRight className="h-12 w-12" />
+              </Button>
+            </div>
           </div>
       </main>
     </div>
