@@ -4,13 +4,14 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
 type ChannelPageProps = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
 export async function generateMetadata({ params }: ChannelPageProps): Promise<Metadata> {
-  const channel = channels.find(c => c.id === params.id);
+  const { id } = await params;
+  const channel = channels.find(c => c.id === id);
   if (!channel) {
     return {
       title: 'Channel Not Found',
@@ -22,8 +23,9 @@ export async function generateMetadata({ params }: ChannelPageProps): Promise<Me
   }
 }
 
-export default function ChannelPage({ params }: ChannelPageProps) {
-  const channel = channels.find(c => c.id === params.id);
+export default async function ChannelPage({ params }: ChannelPageProps) {
+  const { id } = await params;
+  const channel = channels.find(c => c.id === id);
 
   if (!channel) {
     notFound();
